@@ -1,24 +1,14 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import {PlayerCreationContainer} from './PlayerManagement/PlayerCreationContainer'
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Rise and shine Mr. Vogel, rise and shine....
+            Rise and shine Mr. Vogel, rise and shine...
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <PlayerCreationContainer />
         </header>
       </div>
     );
