@@ -9,25 +9,35 @@ import axios from "axios";
 export class PlayerListContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {data: []};
+        this.state = { players: [] };
     }
-    
-    componentDidMount() {
-        getDataFromDb();
+
+    componentWillMount() {
+        this.getPlayers();
     }
-    
+
     render() {
         return (
                 <div/>
                 );
     }
     
-    getDataFromDb = () => {
-    fetch("http://localhost:3001/api/getData")
-      .then(data => data.json())
-      .then(res => this.setState({ data: res.data }));
-  };
+    componentDidUpdate(prevProps, prevState) {
+        alert(JSON.stringify(this.state));
+    }
     
+    getPlayers() {
+        axios.get('http://localhost:3001/api/players').then(function (response) {
+            alert("RESPONSE " + JSON.stringify(response.data.data));
+            this.setState({ players: response.data.data });
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        }).then(function () {
+            // always executed
+        });
+    }
+
 }
 
 

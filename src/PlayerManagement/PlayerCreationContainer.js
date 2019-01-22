@@ -5,6 +5,7 @@
  */
 import React from 'react';
 import { PlayerCreationForm } from './PlayerCreationForm';
+import axios from "axios";
 
 export class PlayerCreationContainer extends React.Component {
 
@@ -20,12 +21,25 @@ export class PlayerCreationContainer extends React.Component {
 
         this.setState({name: input});
     }
-    
+
     onSubmit() {
-        alert(this.state.name);
+        this.postPlayer(this.state.name);
     }
 
-    render() {
+    postPlayer = name => {
+        axios.post("http://localhost:3001/api/player", {
+            id: 2,
+            name: "name"
+        }).then(function (response) {
+            alert(JSON.stringify(response));
+            console.log(response);
+        }).catch(function (error) {
+            alert("ERROR " + error);
+            console.log(error);
+        });
+    }
+    ;
+            render() {
         return(
                 (<div>
                     <div>Create Players here.</div>

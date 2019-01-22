@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {PlayerCreationContainer} from './PlayerManagement/PlayerCreationContainer'
+import {PlayerCreationContainer} from './PlayerManagement/PlayerCreationContainer';
+import {PlayerListContainer} from './PlayerManagement/PlayerListContainer';
+
 class App extends Component {
   render() {
     return (
@@ -9,6 +11,7 @@ class App extends Component {
             Rise and shine Mr. Vogel, rise and shine...
           </p>
           <PlayerCreationContainer />
+          <PlayerListContainer />
         </header>
       </div>
     );
