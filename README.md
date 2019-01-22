@@ -1,3 +1,5 @@
+﻿React Frontend for sportsMMR web application. Backend repo here: https://github.com/hendrikvgl/sportsMMR-server
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
