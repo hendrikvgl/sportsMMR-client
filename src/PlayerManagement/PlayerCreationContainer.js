@@ -6,6 +6,7 @@
 import React from 'react';
 import { PlayerCreationForm } from './PlayerCreationForm';
 import axios from "axios";
+import playerService from "../DatabaseServices/PlayerDbService";
 
 export class PlayerCreationContainer extends React.Component {
 
@@ -23,23 +24,20 @@ export class PlayerCreationContainer extends React.Component {
     }
 
     onSubmit() {
-        this.postPlayer(this.state.name);
+//        this.postPlayer(this.state.name);
+        playerService.postPlayer(this.state.name, this.onCreationSuccess, this.onCreationError);
     }
 
-    postPlayer = name => {
-        axios.post("http://localhost:3001/api/player", {
-            id: 2,
-            name: "name"
-        }).then(function (response) {
-            alert(JSON.stringify(response));
-            console.log(response);
-        }).catch(function (error) {
-            alert("ERROR " + error);
-            console.log(error);
-        });
+    onCreationSuccess() {
+        alert("Success Callback");
+        //TODO: Implement form wipe and PlayerListCOntainer rerender
     }
-    ;
-            render() {
+
+    onCreationError() {
+
+    }
+
+    render() {
         return(
                 (<div>
                     <div>Create Players here.</div>

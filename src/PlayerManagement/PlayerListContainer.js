@@ -5,37 +5,26 @@
  */
 import React from "react";
 import axios from "axios";
+import playerService from "../DatabaseServices/PlayerDbService";
 
 export class PlayerListContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { players: [] };
+        this.state = {players: []};
     }
 
     componentWillMount() {
-        this.getPlayers();
+         playerService.getPlayers(this);
     }
 
     render() {
         return (
-                <div/>
+                <div>{ this.state.players }</div>
                 );
     }
-    
+
     componentDidUpdate(prevProps, prevState) {
-        alert(JSON.stringify(this.state));
-    }
-    
-    getPlayers() {
-        axios.get('http://localhost:3001/api/players').then(function (response) {
-            alert("RESPONSE " + JSON.stringify(response.data.data));
-            this.setState({ players: response.data.data });
-            console.log(response);
-        }).catch(function (error) {
-            console.log(error);
-        }).then(function () {
-            // always executed
-        });
+//        alert(JSON.stringify(this.state));
     }
 
 }
