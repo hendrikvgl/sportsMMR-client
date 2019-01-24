@@ -3,6 +3,10 @@ import {PlayerCreationContainer} from './PlayerManagement/PlayerCreationContaine
 import {PlayerListContainer} from './PlayerManagement/PlayerListContainer';
 import playerService from "./DatabaseServices/PlayerDbService";
 
+import Container from 'react-bootstrap/lib/Container';
+import Row from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
+
 export class PlayerManager extends React.Component {
 
     constructor(props) {
@@ -21,10 +25,10 @@ export class PlayerManager extends React.Component {
 
     render() {
         return (
-                <div>
+                <Container>
                     <PlayerCreationContainer onCreation={this.handlePlayerChange} />
                     <PlayerListContainer onDelete={this.handlePlayerChange} players={this.state.players}/>
-                </div>
+                </Container>
                 );
     }
 }
