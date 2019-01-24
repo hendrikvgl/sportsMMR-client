@@ -1,9 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { PlayerManager } from './PlayerManager';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+        (
+                <div className="App">
+                    <header className="App-header">
+                        <p>
+                            Rise and shine Mr. Vogel, rise and shine...
+                        </p>
+                        <PlayerManager />
+                    </header>
+                </div>
+                ),
+        document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -15,6 +15,7 @@ export class PlayerCreationContainer extends React.Component {
         this.state = {name: ""};
         this.onNameChange = this.onNameChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onCreationSuccess = this.onCreationSuccess.bind(this);
     }
 
     onNameChange(e) {
@@ -24,24 +25,27 @@ export class PlayerCreationContainer extends React.Component {
     }
 
     onSubmit() {
-//        this.postPlayer(this.state.name);
         playerService.postPlayer(this.state.name, this.onCreationSuccess, this.onCreationError);
     }
 
     onCreationSuccess() {
-        alert("Success Callback");
         //TODO: Implement form wipe and PlayerListCOntainer rerender
+        
+        this.setState({name: ""});
+        
+        this.props.onCreation();
+        
     }
 
-    onCreationError() {
-
+    onCreationError(e) {
+        alert("Error " + e);
     }
 
     render() {
         return(
                 (<div>
                     <div>Create Players here.</div>
-                    < PlayerCreationForm onChange={this.onNameChange} onSubmit={this.onSubmit} />
+                    < PlayerCreationForm value={this.state.name} onChange={this.onNameChange} onSubmit={this.onSubmit} />
                 </div>)
                 );
     }

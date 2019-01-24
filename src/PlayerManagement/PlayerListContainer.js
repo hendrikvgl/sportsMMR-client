@@ -5,26 +5,31 @@
  */
 import React from "react";
 import axios from "axios";
-import playerService from "../DatabaseServices/PlayerDbService";
+import { PlayerListItem } from "./PlayerListItem";
+
 
 export class PlayerListContainer extends React.Component {
+
     constructor(props) {
         super(props);
-        this.state = {players: []};
+        this.onDelete = this.onDelete.bind(this);
     }
 
-    componentWillMount() {
-         playerService.getPlayers(this);
+    onDelete() {
+        this.props.onDelete();
     }
 
     render() {
-        return (
-                <div>{ this.state.players }</div>
-                );
-    }
 
-    componentDidUpdate(prevProps, prevState) {
-//        alert(JSON.stringify(this.state));
+        return (
+                (
+                <div>
+                            {this.props.players.map(player => (
+                                                                <PlayerListItem onDelete={this.onDelete} json={JSON.parse(player)} />
+                                                    ))}
+                        </div>
+                                )
+        );
     }
 
 }

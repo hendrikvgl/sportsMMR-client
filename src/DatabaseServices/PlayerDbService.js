@@ -18,15 +18,28 @@ export default {
             console.log(error);
         });
     },
-    
+
     postPlayer: function (name, callbackSucc, callbackErr) {
         axios.post("http://localhost:3001/api/player", {
             name: name
         }).then((response) => {
             callbackSucc();
         }).catch((error) => {
-            callbackErr();
+            callbackErr(error);
+        });
+    },
+
+    deletePlayer: function (id, callbackSucc, callbackErr) {
+
+        axios.delete("http://localhost:3001/api/player", {
+            data: {
+                _id: id
+            }
+        }).then((response) => {
+            callbackSucc();
+        }).catch((error) => {
+            callbackErr(error);
         });
     }
-    
+
 }

@@ -4,25 +4,25 @@
  * and open the template in the editor.
  */
 import React from 'react';
-
 export class PlayerCreationForm extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    
+
     handleSubmit(e) {
         e.preventDefault();
         this.props.onSubmit();
     }
-    
+
     render() {
+
         return (
                 (<form onSubmit={this.handleSubmit}>
                     <label>
                         Name:
-                        <input type="text" name="name" onChange={this.props.onChange}/>
+                        <input type="text" name="name" value={this.props.value} onChange={this.props.onChange}/>
                     </label>
                     <input type="submit" value="Submit" />
                 </form>)
