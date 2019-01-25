@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { PlayerManager } from './PlayerManager';
 import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 import { colorBranding } from './styles/ColorBranding';
 import Container from 'react-bootstrap/lib/Container';
@@ -14,21 +16,26 @@ document.body.style = 'background: ' + colorBranding.primaryBackground;
 ReactDOM.render(
         (
                 <Container fluid={true} >
-                    <Row>
+         <Row>
                         <Col>
                         <h1 className="title">
-                            Rise and shine Mr. Vogel, rise and shine...
+                            sportsMMR
                         </h1>
                         </Col>
                     </Row>
-                    <Row className="show-grid">
-                    
-                    //TODO: FIX FUCKING LAYOUT 
-                        
-                        <Col md={4} mdOffset={4} lg={4} lgOffset={4} >
+                    <Row>
+                        <Col>
+                        <h2 className="subtitle">
+                            Competitive for fun.
+                        </h2>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col> </Col>
+                        <Col xs={10} className="dummy" >
                         <PlayerManager />
                         </Col>
-                        
+                        <Col> </Col>               
                     </Row>
                 </Container>
                 ),

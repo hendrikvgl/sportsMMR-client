@@ -7,6 +7,9 @@ import React from 'react';
 import { PlayerCreationForm } from './PlayerCreationForm';
 import axios from "axios";
 import playerService from "../DatabaseServices/PlayerDbService";
+import Container from 'react-bootstrap/lib/Container';
+import Row from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
 
 export class PlayerCreationContainer extends React.Component {
 
@@ -30,11 +33,11 @@ export class PlayerCreationContainer extends React.Component {
 
     onCreationSuccess() {
         //TODO: Implement form wipe and PlayerListCOntainer rerender
-        
+
         this.setState({name: ""});
-        
+
         this.props.onCreation();
-        
+
     }
 
     onCreationError(e) {
@@ -43,10 +46,11 @@ export class PlayerCreationContainer extends React.Component {
 
     render() {
         return(
-                (<div>
-                    <div>Create Players here.</div>
-                    < PlayerCreationForm value={this.state.name} onChange={this.onNameChange} onSubmit={this.onSubmit} />
-                </div>)
+                (<Container>
+                    <Row>
+                        < PlayerCreationForm value={this.state.name} onChange={this.onNameChange} onSubmit={this.onSubmit} />
+                    </Row>
+                </Container>)
                 );
     }
 }

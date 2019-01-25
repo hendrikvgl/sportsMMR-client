@@ -10,5 +10,6 @@ export const colorBranding = {
   primaryDetailBlue: '#7fbeeb',
   primaryDetailGreen: '#9ad5ca',
   primaryAttention: '#e54b4b'
+// tealblue #468189
   // your colors
 }

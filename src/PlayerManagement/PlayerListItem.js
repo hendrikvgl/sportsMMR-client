@@ -6,36 +6,41 @@
 
 import React from "react";
 import playerService from "../DatabaseServices/PlayerDbService";
+import "../styles/playermanagement.css";
+import Container from 'react-bootstrap/lib/Container';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
 
 export class PlayerListItem extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
         this.onDeleteSuccess = this.onDeleteSuccess.bind(this);
     }
-    
+
     handleClick() {
         const id = this.props.json._id;
-        playerService.deletePlayer(id, this.onDeleteSuccess, this.onDeleteError );
+        playerService.deletePlayer(id, this.onDeleteSuccess, this.onDeleteError);
     }
-    
+
     onDeleteSuccess() {
         this.props.onDelete();
     }
-    
+
     onDeleteError() {
-        
+
     }
-    
+
     render() {
         return (
-                <div>
-                    {this.props.json.name} {this.props.json._id}
+                <Row className="player-list-item">
                 
-                    <button onClick={this.handleClick} >x</button>
+                    <div className="player-list-item-name" id="playerName">{this.props.json.name}</div>
+                                                
+                    <button className="player-delete-button" onClick={this.handleClick} >x</button>
                 
-                </div>
+                </Row>
                 );
     }
 }

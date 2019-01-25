@@ -9,6 +9,18 @@ and open the template in the editor.
 */
 
 .title {
+    margin-top: 20px;
     color: #e1eff6;
     text-align: center;
+}
+
+.subtitle {
+    color: #e1eff6;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dummy {
+    background-color: #468189;
+    border-radius: 10px;
 }

@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 import React from 'react';
+import Container from 'react-bootstrap/lib/Container';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
+import '../styles/playermanagement.css';
 export class PlayerCreationForm extends React.Component {
 
     constructor(props) {
@@ -19,13 +23,20 @@ export class PlayerCreationForm extends React.Component {
     render() {
 
         return (
-                (<form onSubmit={this.handleSubmit}>
-                    <label>
-                        Name:
-                        <input type="text" name="name" value={this.props.value} onChange={this.props.onChange}/>
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>)
+                (<Container >
+                
+                    <Row>
+                        <label className="standard-font">Name:</label>
+                    </Row>
+                    <Row className="flex-container player-input-form">
+                
+                        <input className="fill-width" type="text" name="name" value={this.props.value} onChange={this.props.onChange}/>
+                
+                        <input type="submit" value="Submit" onClick={this.handleSubmit} />
+                
+                    </Row>
+                                                                                 
+                </Container>)
                 );
     }
 }
