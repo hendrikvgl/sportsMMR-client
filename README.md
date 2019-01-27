@@ -6,6 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 npm install --save bootstrap
 npm install react-bootstrap@next bootstrap
 
+npm install @kenshooui/react-multi-select --save
 ## Available Scripts
 
 In the project directory, you can run:

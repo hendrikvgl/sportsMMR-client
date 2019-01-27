@@ -6,9 +6,27 @@
 import axios from "axios";
 
 export default {
-    findActiveSession: function (callbackActive, callbackNoActive, callbackError) {
+    findActiveSession: function (callbackSuccess, callbackError) {
         axios.get("http://localhost:3001/api/session").then((response) => {
-            alert(JSON.stringify(response));
+            callbackSuccess(response);
+        }).catch((error) => {
+            callbackError(error);
+        });
+    },
+    postSession: function (players, callbackSuccess, callbackError) {
+        axios.post("http://localhost:3001/api/session", {
+            players: players
+        }).then((response) => {
+            callbackSuccess(response);
+        }).catch((error) => {
+            callbackError(error);
+        });
+    },
+    endSession: function(id, callbackSuccess, callbackError) {
+        axios.put("http://localhost:3001/api/session", {
+            _id: id
+        }).then((response) => {
+            callbackSuccess(response);
         }).catch((error) => {
             callbackError(error);
         });

@@ -13,21 +13,47 @@ import '../styles/sessionmanagement.css'
 
 export class SessionMonitor extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.onCreateSession = this.onCreateSession.bind(this);
+        this.state = {creationButton: true};
+    }
+
+    onCreateSession() {
+        this.setState({creationButton: false});
+        this.props.onCreateSession();
+    }
+
     noActiveSession() {
         return((
                 <Row>
                     <div className="standard-font session-info">
                         No active Session.
                     </div>
-                    <button className="session-start-btn">
-                        Start new.
-                    </button>
+                    {this.state.creationButton ? (
+                                            <button onClick={this.onCreateSession} className="session-start-btn">
+                                                Start new.
+                                            </button>) :
+                                (<div/>)}
                 </Row>
                 ));
     }
 
     activeSession() {
-        return(<div className="standard-font session-info">Active Session.</div>);
+        let playerstring = "";
+        this.props.sessionPlayers.map(x => playerstring = playerstring + " " + x.label);
+        return(
+                (<div>
+                    <Row className="standard-font session-info">
+                        Active Session.
+                
+                        <button onClick={this.props.onEndSession} className="session-button-end">End Session</button>
+                    </Row>
+                    <div className="standard-font session-players">
+                        Players: {playerstring}
+                    </div>
+                </div>)
+                );
     }
 
     render() {

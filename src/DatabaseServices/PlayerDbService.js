@@ -6,13 +6,14 @@
 import axios from "axios";
 
 export default {
-    getPlayers: function (ref) {
-        var self = ref;
+    getPlayers: function (callback) {
+
         axios.get('http://localhost:3001/api/players').then((response) => {
             console.log(response);
             const playerArray = [];
             response.data.data.map(x => playerArray.push(JSON.stringify(x)));
-            self.setState({players: playerArray});
+            //TODO change to callback
+            callback( playerArray);
 
         }).catch((error) => {
             console.log(error);

@@ -13,14 +13,19 @@ export class PlayerManager extends React.Component {
         super(props);
         this.state = {players: []};
         this.handlePlayerChange = this.handlePlayerChange.bind(this);
+        this.onPlayerLoad = this.onPlayerLoad.bind(this);
     }
 
     handlePlayerChange() {
-        playerService.getPlayers(this);
+        playerService.getPlayers(this.onPlayerLoad);
     }
 
     componentWillMount() {
-        playerService.getPlayers(this);
+        playerService.getPlayers(this.onPlayerLoad);
+    }
+    
+    onPlayerLoad(players) {
+        this.setState({players: players});
     }
 
     render() {

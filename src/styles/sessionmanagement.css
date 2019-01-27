@@ -16,6 +16,21 @@ and open the template in the editor.
     font-size: x-large;
 }
 
+.session-players {
+    font-size: large;
+}
+
+.session-button-end {
+    margin-left: auto;
+    margin-right: 0;
+    color: black;
+}
+
+.border-line {
+    border: 3px solid #e1eff6;
+    border-radius: 2px;
+}
+
 .session-start-btn {
     margin-left: auto;
     margin-right: 0;
