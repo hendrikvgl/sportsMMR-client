@@ -9,18 +9,39 @@ import '../../styles/matchmanagement.css';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import matchService from '../../DatabaseServices/MatchDbService';
+import { SessionMatchList } from './SessionMatchList';
 export class MatchManager extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {activeMatch: false, teamOne: [], teamTwo: []};
+        this.state = {activeMatch: false, activeMatchId: null, teamOne: [], teamTwo: [], resultsOne: null, resultsTwo: null};
         this.getMatchesSuccessCallback = this.getMatchesSuccessCallback.bind(this);
         this.onMatchShuffle = this.onMatchShuffle.bind(this);
         this.matchCreationSuccCallback = this.matchCreationSuccCallback.bind(this);
+        this.onChangeResultsOne = this.onChangeResultsOne.bind(this);
+        this.onChangeResultsTwo = this.onChangeResultsTwo.bind(this);
+        this.confirmMatchResults = this.confirmMatchResults.bind(this);
+        this.onMatchEndSuccessCallback = this.onMatchEndSuccessCallback.bind(this);
     }
 
     componentWillMount() {
         matchService.findActiveMatch(this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
+    }
+
+    onChangeResultsOne(e) {
+        const input = e.target.value;
+
+
+        this.setState({resultsOne: input});
+
+    }
+
+    onChangeResultsTwo(e) {
+        const input = e.target.value;
+
+
+        this.setState({resultsTwo: input});
+
     }
 
     onMatchShuffle() {
@@ -47,27 +68,56 @@ export class MatchManager extends React.Component {
     }
 
     matchCreationSuccCallback(response) {
-        matchService.findSessionMatches(this.props.sessionId, this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
+        matchService.findActiveMatch(this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
     }
 
     matchCreationErrorCallback(error) {
-        alert(error);
+//        alert(error);
     }
 
     getMatchesSuccessCallback(response) {
         let activeBool = false;
         let teamOne = [];
         let teamTwo = [];
-        if (response.data.data !== false) {
+        let activeMatchId = "";
+        if (response.data.data !== null) {
             activeBool = true;
             teamOne = response.data.data.teamOne;
             teamTwo = response.data.data.teamTwo;
+            activeMatchId = response.data.data._id;
         }
-        this.setState({activeMatch: activeBool, teamOne: teamOne, teamTwo: teamTwo});
+        this.setState({activeMatch: activeBool, teamOne: teamOne, teamTwo: teamTwo, activeMatchId: activeMatchId});
+    }
+
+    confirmMatchResults() {
+        const resultOne = parseInt(this.state.resultsOne);
+        const resultTwo = parseInt(this.state.resultsTwo);
+
+        let winners = [];
+        if (resultOne > resultTwo) {
+            winners = this.state.teamOne;
+        } else if (resultOne < resultTwo) {
+            winners = this.state.teamTwo;
+        } else {
+            return alert("One team needs to be the winner");
+        }
+
+        if ((resultOne !== null && resultOne !== "") && (resultTwo !== null && resultTwo !== "")) {
+            matchService.endMatch(this.state.activeMatchId, [resultOne, resultTwo], winners, this.onMatchEndSuccessCallback, this.onMatchEndErrorCallback);
+        }
+
+    }
+
+    onMatchEndSuccessCallback(response) {
+        matchService.findActiveMatch(this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
+    }
+
+    onMatchEndErrorCallback(error) {
+//        alert(JSON.stringify(error));
     }
 
     getMatchesErrorCallback(error) {
-        alert(JSON.stringify(error));
+//        alert(JSON.stringify(error));
     }
 
     shuffle(array) {
@@ -90,9 +140,11 @@ export class MatchManager extends React.Component {
     render() {
         const activeMatch = this.state.activeMatch;
         let teamOnePlayers = "";
-        this.state.teamOne.map(x => teamOnePlayers = teamOnePlayers + x.label + "\n");
         let teamTwoPlayers = "";
-        this.state.teamTwo.map(x => teamTwoPlayers = teamTwoPlayers + x.label + "\n");
+        if (activeMatch) {
+            this.state.teamOne.map(x => teamOnePlayers = teamOnePlayers + x.label + "\n");
+            this.state.teamTwo.map(x => teamTwoPlayers = teamTwoPlayers + x.label + "\n");
+        }
 
         return(<Container>
             <Row>
@@ -117,12 +169,12 @@ export class MatchManager extends React.Component {
                                 <Row flex={true} className="row-active-match" noGutters={true}>
                                     <Col className="team-players" xs={4}> 
                                     <textarea disabled className="team-players-area">
-                                                                                                                                    {teamOnePlayers}
+                                                                                                                                                                                                            {teamOnePlayers}
                                     </textarea>
                                     </Col>
                         
                                     <Col className="col-result-left" xs={1}> 
-                                    <input type="number" className="match-result"/>
+                                    <input type="number" onChange={this.onChangeResultsOne} className="match-result"/>
                                     </Col>
                         
                                     <Col xs={2}>
@@ -130,12 +182,12 @@ export class MatchManager extends React.Component {
                                     </Col>
                         
                                     <Col className="col-result-right" xs={1}> 
-                                    <input type="number" className="match-result"/>
+                                    <input type="number" onChange={this.onChangeResultsTwo} className="match-result"/>
                                     </Col>
                         
                                     <Col className="team-players" xs={4}> 
                                     <textarea disabled className="team-players-area team-players-area-right">
-                                                                                                                                    {teamTwoPlayers}
+                                                                                                                                                                                                            {teamTwoPlayers}
                                     </textarea>
                                     </Col>
                         
@@ -143,7 +195,7 @@ export class MatchManager extends React.Component {
                                 <Row>
                                     <Col></Col>
                                     <Col xs={4}>
-                                    <button>Confirm Results</button>
+                                    <button onClick={this.confirmMatchResults} >Confirm Results</button>
                                     </Col>
                                     <Col></Col>
                                 </Row>
@@ -154,9 +206,7 @@ export class MatchManager extends React.Component {
             <Row>
                 <div className="standard-font active-match-font">Recent Matches</div>
             </Row>
-            <Row className="match-dummy">
-        
-            </Row>
+            <SessionMatchList sessionId={this.props.sessionId} />
         </Container>);
     }
 
