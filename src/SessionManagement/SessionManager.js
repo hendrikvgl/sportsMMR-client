@@ -47,7 +47,9 @@ export class SessionManager extends React.Component {
         
         let activeBool = false;
         let sessionPlayers = [{}];
+//         let sessionPlayers = [];
         let sessionId = "";
+        
 
         if (response.data.data !== null) {
             activeBool = true;
