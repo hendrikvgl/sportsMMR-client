@@ -25,7 +25,7 @@ and open the template in the editor.
 }
 
 .player-list-item {
-    display: inline-block;
+    /*display: inline-block;*/
     height: 50px;
     padding: 5px;
     border-color: #2C4251;
@@ -41,6 +41,7 @@ and open the template in the editor.
 .player-list-item-name {
     color: #E1EFF6;
     font-size: x-large;
+    width: auto;
 }
 
 .player-delete-button {
