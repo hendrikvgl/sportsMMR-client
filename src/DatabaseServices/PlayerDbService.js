@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 import axios from "axios";
+import url from "./dbConfig";
 
 export default {
     getPlayers: function (callback) {
 
-        axios.get('http://localhost:3001/api/players').then((response) => {
+        axios.get('http://'+url+'/api/players').then((response) => {
             console.log(response);
             const playerArray = [];
             response.data.data.map(x => playerArray.push(JSON.stringify(x)));
@@ -21,7 +22,7 @@ export default {
     },
 
     postPlayer: function (name, callbackSucc, callbackErr) {
-        axios.post("http://localhost:3001/api/player", {
+        axios.post("http://"+url+"/api/player", {
             name: name
         }).then((response) => {
             callbackSucc();
@@ -32,7 +33,7 @@ export default {
 
     deletePlayer: function (id, callbackSucc, callbackErr) {
 
-        axios.delete("http://localhost:3001/api/player", {
+        axios.delete("http://"+url+"/api/player", {
             data: {
                 _id: id
             }

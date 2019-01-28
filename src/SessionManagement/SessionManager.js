@@ -12,6 +12,9 @@ import playerService from "../DatabaseServices/PlayerDbService";
 import Container from 'react-bootstrap/lib/Container';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
+import { MatchManager } from './MatchManagement/MatchManager';
+
+
 export class SessionManager extends React.Component {
 
     constructor(props) {
@@ -96,7 +99,8 @@ export class SessionManager extends React.Component {
                             <div>
                                 <SessionMonitor onEndSession={this.handleEndSession} onCreateSession={this.onCreateSession} activeSession={this.state.activeSession} sessionPlayers={this.state.sessionPlayers} />
                                 {activeSession ? (
-                                        <div><hr className="border-line" /></div>
+                                                            <div><hr className="border-line" />
+                                                                <MatchManager sessionId={this.state.sessionId} players={ this.state.sessionPlayers } /></div>
                                                     ) : <div/>}
                             </div>
                         
