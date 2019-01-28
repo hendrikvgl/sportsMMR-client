@@ -14,7 +14,7 @@ export class SessionMatchList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { matches: [] };
+        this.state = {teamOne: [], teamTwo: [], results: []};
         this.componentWillMount = this.componentWillMount.bind(this);
         this.onMatchLoadSuccessCallback = this.onMatchLoadSuccessCallback.bind(this);
     }
@@ -22,9 +22,33 @@ export class SessionMatchList extends React.Component {
     componentWillMount() {
         matchService.findSessionMatches(this.props.sessionId, this.onMatchLoadSuccessCallback, this.onMatchLoadErrorCallback);
     }
+    
+    componentWillReceiveProps() {
+        matchService.findSessionMatches(this.props.sessionId, this.onMatchLoadSuccessCallback, this.onMatchLoadErrorCallback);
+    }
 
     onMatchLoadSuccessCallback(response) {
-        this.setState({matches: JSON.parse(response)});
+   
+        const matches = response.data.data;
+        let teamOne = [];
+        let teamTwo = [];
+        let results = [];
+        var arrayLength = matches.length;
+        for (var i = 0; i < arrayLength; i++) {
+            let oneString = "";
+            const one = matches[i].teamOne;
+            one.map(x => oneString = oneString + " " + x.label);
+            teamOne.push(oneString);
+            
+            let twoString = "";
+            const two = matches[i].teamTwo;
+            two.map(x => twoString = twoString + " " + x.label);
+            teamTwo.push(twoString);
+
+            results.push(matches[i].results);
+        }
+
+        this.setState({teamOne: teamOne, teamTwo: teamTwo, results: results});
     }
 
     onMatchLoadErrorCallback(error) {
@@ -32,15 +56,18 @@ export class SessionMatchList extends React.Component {
     }
 
     render() {
-        const matches = this.state.matches;
+        const teamOne = this.state.teamOne;
+        const teamTwo = this.state.teamTwo;
+        const results = this.state.results;
+        
+        var rows = [];
+        for (var i = 0; i < teamOne.length; i++) {
+            rows.push(<MatchItem teamOne={teamOne[i]} teamTwo={teamTwo[i]} results={results[i]} />);
+        }
         return(
                 (
                         <Row>
-                        
-                            {matches.map(match => (
-                                                                <MatchItem json={JSON.parse(match)} />
-                                                    ))}
-                        
+                            {rows}
                         </Row>
                         )
                 );

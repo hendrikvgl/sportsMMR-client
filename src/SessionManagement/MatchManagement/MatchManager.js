@@ -14,7 +14,7 @@ export class MatchManager extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {activeMatch: false, activeMatchId: null, teamOne: [], teamTwo: [], resultsOne: null, resultsTwo: null};
+        this.state = {activeMatch: false, activeMatchId: null, teamOne: [], teamTwo: [], resultsOne: null, resultsTwo: null, matchListToggle: false};
         this.getMatchesSuccessCallback = this.getMatchesSuccessCallback.bind(this);
         this.onMatchShuffle = this.onMatchShuffle.bind(this);
         this.matchCreationSuccCallback = this.matchCreationSuccCallback.bind(this);
@@ -109,6 +109,7 @@ export class MatchManager extends React.Component {
     }
 
     onMatchEndSuccessCallback(response) {
+        this.setState({matchListToggle: !this.state.matchListToggle});
         matchService.findActiveMatch(this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
     }
 
@@ -206,7 +207,7 @@ export class MatchManager extends React.Component {
             <Row>
                 <div className="standard-font active-match-font">Recent Matches</div>
             </Row>
-            <SessionMatchList sessionId={this.props.sessionId} />
+            <SessionMatchList sessionId={this.props.sessionId} matchListToggle={this.state.matchListToggle}  />
         </Container>);
     }
 

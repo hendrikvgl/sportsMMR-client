@@ -45,6 +45,10 @@ and open the template in the editor.
     margin-top: 20px;
 }
 
+.match-result {
+    font-size: larger;
+}
+
 .team-players-area {
     background-color: transparent;
     border-style: none;

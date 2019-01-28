@@ -7,13 +7,18 @@ import React from "react";
 import Container from 'react-bootstrap/lib/Container';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
+import '../../styles/matchmanagement.css';
 
 export class MatchItem extends React.Component {
     render() {
         return (
                 (
-                <Row>{this.props.json.teamOne}*{this.props.json.results[0]}-{this.props.json.results[1]}*{this.props.json.teamTwo}</Row>
-                )
+                        <Container>
+                            <Row className="standard-font match-result">
+                                {this.props.teamOne}*{this.props.results[0]}-{this.props.results[1]}*{this.props.teamTwo}
+                            </Row>
+                        </Container>
+                        )
                 );
     }
 }
