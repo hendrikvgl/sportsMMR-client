@@ -15,20 +15,29 @@ and open the template in the editor.
 }
 
 .nav-item {
-    border-color: #e1eff6;
-    border-style: solid;
+    border-color: #2c4251;
+    border-width: 1px;
     height: 30px;
-    background-color: #6EA4CC;
+    /*background-color: #6EA4CC;*/
+    /*background-color: #468189;*/
+    /*background-color: #9DBEBB;*/
+    background-image: linear-gradient(#468189, #84CCC6, #468189);
     font-size: 18px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     color: #e1eff6;
     text-align: center;
     cursor: pointer;
 }
+.nav-item:active {
+    background-image: linear-gradient(#468189, #5B8C88, #468189);
+}
 
 .nav-item-left {
     border-radius: 5px 0px 0px 5px;
+    border-style: none solid none none;
 }
 
 .nav-item-right {
     border-radius: 0px 5px 5px 0px;
+    border-style: none none none solid;
 }

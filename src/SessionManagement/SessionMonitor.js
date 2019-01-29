@@ -26,7 +26,7 @@ export class SessionMonitor extends React.Component {
 
     noActiveSession() {
         return((
-                <Row>
+                <Row className="row-session-monitor">
                     <div className="standard-font session-info">
                         No active Session.
                     </div>

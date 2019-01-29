@@ -32,10 +32,10 @@ export class PlayerCreationForm extends React.Component {
                 
                         <input className="fill-width" type="text" name="name" value={this.props.value} onChange={this.props.onChange}/>
                 
-                        <input type="submit" value="Submit" onClick={this.handleSubmit} />
+                        <button type="button" className="button-player-submit" onClick={this.handleSubmit} > Submit </button>
                 
                     </Row>
-                                                                                 
+                
                 </Container>)
                 );
     }

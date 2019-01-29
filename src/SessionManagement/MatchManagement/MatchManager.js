@@ -200,11 +200,9 @@ export class MatchManager extends React.Component {
                         
                                 </Row>
                                 <Row>
-                                    <Col></Col>
-                                    <Col xs={4}>
-                                    <button onClick={this.confirmMatchResults} >Confirm Results</button>
-                                    </Col>
-                                    <Col></Col>
+                                    
+                                    <button className="button-results-confirm" onClick={this.confirmMatchResults} >Confirm Results</button>
+                                    
                                 </Row>
                         
                             </Container>

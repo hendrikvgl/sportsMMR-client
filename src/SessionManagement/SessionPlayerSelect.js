@@ -52,7 +52,7 @@ export class SessionPlayerSelect extends React.Component {
                         selectAllHeight={45}
                         />
                         
-                    <button onClick={this.onSubmit} >Start Session.</button>
+                    <button className="button-session-init" onClick={this.onSubmit} >Start Session.</button>
                         
                 </div>
 

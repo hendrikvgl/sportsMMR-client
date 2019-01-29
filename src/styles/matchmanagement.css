@@ -89,9 +89,38 @@ and open the template in the editor.
     margin-top: 10px;
 }
 
+.button-results-confirm {
+    width: 100%;
+    height: 30px;
+    color: black;
+    background-color: #C3E2DD;
+    border-radius: 3px 3px 3px 3px;
+    border-width: 1px;
+    border-style: none;
+    border-color: transparent;
+    border-image: none;
+    font-size: large;
+    margin-bottom: 15px;
+}
+
+.button-results-confirm:active {
+    background-color: #9DB7B2;
+}
+
 .match-button {
     width: 100%;
     height: 100%;
+    color: black;
+    background-color: #C3E2DD;
+    border-radius: 3px 3px 3px 3px;
+    border-width: 1px;
+    border-style: none;
+    border-color: transparent;
+    border-image: none;
     font-size: large;
+}
+
+.match-button:active {
+    background-color: #9DB7B2;
 }
 

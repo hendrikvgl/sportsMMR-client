@@ -9,11 +9,11 @@ and open the template in the editor.
 */
 
 .flex-container {
-  display: flex;
+    display: flex;
 }
 
 .fill-width {
-  flex: 1;
+    flex: 1;
 }
 
 .top-lvl-container {
@@ -22,6 +22,8 @@ and open the template in the editor.
 
 .player-input-form {
     margin-bottom: 10px;
+    font-size: large;
+    height: 30px;
 }
 
 .player-list-item {
@@ -43,7 +45,33 @@ and open the template in the editor.
     width: auto;
 }
 
+.button-player-submit {
+    height: 100%;
+    background-color: #C3E2DD;
+    border-radius: 0px 3px 3px 0px;
+    border-width: 1px;
+    border-style: none;
+    border-color: transparent;
+    border-image: none;
+}
+.button-player-submit:active {
+    background-color: #9DB7B2;
+}
+
 .player-delete-button {
-        margin-left:auto; 
-        margin-right:0;
-    }
+    margin-left:auto; 
+    margin-right:0;
+    height: 100%;
+    width: 30px;
+    background-color: #C3E2DD;
+    border-radius: 3px 3px 3px 3px;
+    border-width: 1px;
+    border-style: none;
+    border-color: transparent;
+    border-image: none;
+    font-size: large;
+}
+
+.player-delete-button:active {
+    background-color: #9DB7B2;
+}

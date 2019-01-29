@@ -24,6 +24,17 @@ and open the template in the editor.
     margin-left: auto;
     margin-right: 0;
     color: black;
+    background-color: #C3E2DD;
+    border-radius: 3px 3px 3px 3px;
+    border-width: 1px;
+    border-style: none;
+    border-color: transparent;
+    border-image: none;
+    font-size: large;
+}
+
+.session-button-end:active {
+    background-color: #9DB7B2;
 }
 
 .border-line {
@@ -34,6 +45,40 @@ and open the template in the editor.
 .session-start-btn {
     margin-left: auto;
     margin-right: 0;
+    height: 100%;
+    background-color: #C3E2DD;
+    border-radius: 3px 3px 3px 3px;
+    border-width: 1px;
+    border-style: none;
+    border-color: transparent;
+    border-image: none;
+    font-size: large;
+}
+
+.session-start-btn:active {
+    background-color: #9DB7B2;
+}
+
+.button-session-init {
+    height: 30px;
+    background-color: #C3E2DD;
+    width: 100%;
+    border-radius: 3px 3px 3px 3px;
+    border-width: 1px;
+    border-style: none;
+    border-color: transparent;
+    border-image: none;
+    font-size: large;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.button-session-init:active {
+    background-color: #9DB7B2;
+}
+
+.row-session-monitor {
+    height: 40px;
 }
 
 .session-info-toplvl {
