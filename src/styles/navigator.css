@@ -8,6 +8,13 @@ and open the template in the editor.
     Author     : hevo
 */
 
+.row:before {
+    display: inline-block;
+}
+
+.row:after {
+    display: inline-block;
+}
 
 .nav-container {
     margin-top: 10px;
