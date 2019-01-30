@@ -8,10 +8,23 @@ and open the template in the editor.
     Author     : hevo
 */
 
+
 .title {
     margin-top: 20px;
     color: #e1eff6;
     text-align: center;
+
+}
+
+.logo {
+    width: 100px;
+    float: left;
+    position: absolute;
+    margin-top: 15px;
+}
+
+container-logo {
+    margin-top: 20px;
 }
 
 .subtitle {
