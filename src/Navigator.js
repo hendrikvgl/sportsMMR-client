@@ -16,6 +16,7 @@ export class Navigator extends React.Component {
         super(props);
         this.onNavPlayer = this.onNavPlayer.bind(this);
         this.onNavSession = this.onNavSession.bind(this);
+        this.onNavHistory = this.onNavHistory.bind(this);
     }
     
     onNavPlayer() {
@@ -25,25 +26,36 @@ export class Navigator extends React.Component {
     onNavSession() {
         this.props.onNavSession();
     }
+    
+    onNavHistory() {
+        this.props.onNavHistory();
+    }
 
     render()
     {
         return (
                 <Container fluid={true} className="nav-container">
                     <Row noGutters={true}>
-                        <Col xs={3}/>
-                        <Col xs={3}>
+                        
+                        <Col xs={4}>
                         <div className="nav-item nav-item-left" onClick={this.onNavPlayer} >
                             Players
                         </div>
                         </Col>
                 
-                        <Col xs={3}>
-                        <div className="nav-item nav-item-right" onClick={this.onNavSession}>
-                            Sessions
+                        <Col xs={4}>
+                        <div className="nav-item" onClick={this.onNavSession}>
+                            Session
                         </div>
                         </Col>
-                        <Col xs={3}/>
+                        
+                        <Col xs={4}>
+                        <div className="nav-item nav-item-right" onClick={this.onNavHistory}>
+                            History
+                        </div>
+                        </Col>
+                        
+                        
                     </Row>
                 </Container>
                 );
