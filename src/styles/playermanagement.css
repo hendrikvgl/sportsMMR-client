@@ -35,6 +35,11 @@ and open the template in the editor.
     background-color: #25626B;
 }
 
+.container-player-list {
+    max-height: 370px;
+    overflow: auto;
+}
+
 .standard-font {
     color: #e1eff6;
 }

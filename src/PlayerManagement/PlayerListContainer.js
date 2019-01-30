@@ -9,6 +9,7 @@ import { PlayerListItem } from "./PlayerListItem";
 import Container from 'react-bootstrap/lib/Container';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
+import "../styles/playermanagement.css";
 
 
 export class PlayerListContainer extends React.Component {
@@ -26,7 +27,7 @@ export class PlayerListContainer extends React.Component {
 
         return (
                 (
-                <Container>
+                <Container className="container-player-list" >
                             {this.props.players.map(player => (
                                                                 <PlayerListItem onDelete={this.onDelete} json={JSON.parse(player)} />
                                                     ))}
