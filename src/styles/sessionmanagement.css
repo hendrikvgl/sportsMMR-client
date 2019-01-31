@@ -30,7 +30,7 @@ and open the template in the editor.
     border-style: none;
     border-color: transparent;
     border-image: none;
-    font-size: large;
+    font-size: 15px;
 }
 
 .session-button-end:active {

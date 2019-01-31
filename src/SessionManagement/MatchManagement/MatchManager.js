@@ -160,11 +160,11 @@ export class MatchManager extends React.Component {
             { !activeMatch ? (
                             <Container>
                                 <Row className="row-new-button">
-                                    <Col> </Col>
-                                    <Col xs={8}>
-                                    <button onClick={this.onMatchShuffle} className="match-button"> New - Shuffle </button>
+                                  
+                                    <Col>
+                                    <button onClick={this.onMatchShuffle} className="match-button-new">New - Shuffle</button>
                                     </Col>
-                                    <Col> </Col>  
+          
                                 </Row>
                             </Container>
                                 ) : (

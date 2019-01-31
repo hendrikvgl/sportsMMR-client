@@ -38,7 +38,7 @@ export class HistoryManager extends React.Component {
 
         let i;
 
-        for (i = 0; i < sessionJson.length; i++) {
+        for (i = sessionJson.length - 1; i >=0; i--) {
             let session = [];
             session[0] = sessionJson[i]._id;
             session[1] = sessionJson[i].createdAt;
