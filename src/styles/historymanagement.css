@@ -22,6 +22,14 @@ and open the template in the editor.
     overflow: auto;
 }
 
+.row:before {
+    display: inline-block;
+}
+
+.row:after {
+    display: inline-block;
+}
+
 .header-session-list {
     font-size: x-large;
     margin-top: 5px;
@@ -36,5 +44,26 @@ and open the template in the editor.
     background-color: #25626B;
     margin-left: 0;
     margin-right: 0;
+    cursor: pointer;
 }
 
+.col-history-match-result {
+    text-align: center;
+}
+
+.col-history-match-teamtwo {
+    text-align: right;
+}
+
+.item-history-match {
+    border-color: #2C4251;
+    border-style: solid; 
+    padding: 4px;
+    background-color: #B7C0C9;
+}
+
+.session-extend-icon {
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: x-large;
+}

@@ -35,7 +35,7 @@ export class PlayerManager extends React.Component {
                         <h3 className="standard-font">Enter new player.</h3>
                     </Row>
                     <Row>
-                        <PlayerCreationContainer onCreation={this.handlePlayerChange} />
+                        <PlayerCreationContainer playerList={this.state.players} onCreation={this.handlePlayerChange} />
                     </Row>
                     <Row>
                         <PlayerListContainer onDelete={this.handlePlayerChange} players={this.state.players}/>

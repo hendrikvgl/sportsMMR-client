@@ -10,6 +10,7 @@ import Container from 'react-bootstrap/lib/Container';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import { MatchItem } from "./MatchItem";
+import '../../styles/matchmanagement.css'
 export class SessionMatchList extends React.Component {
 
     constructor(props) {
@@ -66,7 +67,7 @@ export class SessionMatchList extends React.Component {
         }
         return(
                 (
-                        <Row>
+                        <Row className="container-session-matchlist">
                             {rows}
                         </Row>
                         )

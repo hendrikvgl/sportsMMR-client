@@ -19,6 +19,7 @@ export class PlayerCreationContainer extends React.Component {
         this.onNameChange = this.onNameChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onCreationSuccess = this.onCreationSuccess.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onNameChange(e) {
@@ -28,7 +29,23 @@ export class PlayerCreationContainer extends React.Component {
     }
 
     onSubmit() {
-        playerService.postPlayer(this.state.name, this.onCreationSuccess, this.onCreationError);
+        
+        let playerList = this.props.playerList;
+        
+        var i;
+        let playerExists = false;
+        for (i = 0; i < playerList.length; i++) {
+            let playername = JSON.parse(playerList[i]).name;
+            if (this.state.name === playername) {
+                playerExists = true;
+            }
+        }
+
+        if (playerExists) {
+            alert("Player with same name already exists.");
+        } else {
+            playerService.postPlayer(this.state.name, this.onCreationSuccess, this.onCreationError);
+        }
     }
 
     onCreationSuccess() {

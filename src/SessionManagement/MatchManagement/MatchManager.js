@@ -174,13 +174,13 @@ export class MatchManager extends React.Component {
                                 </Row>
                         
                                 <Row flex={true} className="row-active-match" noGutters={true}>
-                                    <Col className="team-players" xs={4}> 
+                                    <Col className="team-players" xs={3}> 
                                     <textarea disabled className="team-players-area">
                                                                                                                                                                                                             {teamOnePlayers}
                                     </textarea>
                                     </Col>
                         
-                                    <Col className="col-result-left" xs={1}> 
+                                    <Col className="col-result-left" xs={2}> 
                                     <input type="number" onChange={this.onChangeResultsOne} className="match-result"/>
                                     </Col>
                         
@@ -188,11 +188,11 @@ export class MatchManager extends React.Component {
                                     <div className="match-double-dot">:</div>
                                     </Col>
                         
-                                    <Col className="col-result-right" xs={1}> 
+                                    <Col className="col-result-right" xs={2}> 
                                     <input type="number" onChange={this.onChangeResultsTwo} className="match-result"/>
                                     </Col>
                         
-                                    <Col className="team-players" xs={4}> 
+                                    <Col className="team-players" xs={3}> 
                                     <textarea disabled className="team-players-area team-players-area-right">
                                                                                                                                                                                                             {teamTwoPlayers}
                                     </textarea>

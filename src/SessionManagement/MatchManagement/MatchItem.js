@@ -14,8 +14,10 @@ export class MatchItem extends React.Component {
         return (
                 (
                         <Container>
-                            <Row className="standard-font match-result">
-                                {this.props.teamOne}*{this.props.results[0]}-{this.props.results[1]}*{this.props.teamTwo}
+                            <Row className="standard-font row-match-item">
+                                <Col xs={5} >{this.props.teamOne}</Col> 
+                                <Col xs={2} className="col-history-match-result">{this.props.results[0]}:{this.props.results[1]}</Col> 
+                                <Col xs={5} className="col-history-match-teamtwo" >{this.props.teamTwo}</Col>
                             </Row>
                         </Container>
                         )
