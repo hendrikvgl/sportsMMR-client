@@ -45,13 +45,13 @@ export class MatchManager extends React.Component {
     }
 
     onMatchShuffle() {
-        
+
         let players = [];
-        
+
 //        alert(JSON.stringify(this.props.players));
-        
+
         this.props.players.map(x => players.push(x));
-                
+
         let playershuffle = this.shuffle(players);
         const playerCount = playershuffle.length;
         let teamOne = [];
@@ -129,13 +129,13 @@ export class MatchManager extends React.Component {
 
     shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
-       
+
         while (0 !== currentIndex) {
 
 
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
-            
+
             temporaryValue = array[currentIndex];
             array[currentIndex] = array[randomIndex];
             array[randomIndex] = temporaryValue;
@@ -160,11 +160,11 @@ export class MatchManager extends React.Component {
             { !activeMatch ? (
                             <Container>
                                 <Row className="row-new-button">
-                                  
+                        
                                     <Col>
                                     <button onClick={this.onMatchShuffle} className="match-button-new">New - Shuffle</button>
                                     </Col>
-          
+                        
                                 </Row>
                             </Container>
                                 ) : (
@@ -174,35 +174,35 @@ export class MatchManager extends React.Component {
                                 </Row>
                         
                                 <Row flex={true} className="row-active-match" noGutters={true}>
-                                    <Col className="team-players" xs={3}> 
+                                    <Col className="team-players" xs={4}> 
                                     <textarea disabled className="team-players-area">
-                                                                                                                                                                                                            {teamOnePlayers}
+                                                                                                                                                                                                                                                                                    {teamOnePlayers}
                                     </textarea>
                                     </Col>
                         
-                                    <Col className="col-result-left" xs={2}> 
-                                    <input type="number" onChange={this.onChangeResultsOne} className="match-result"/>
-                                    </Col>
                         
-                                    <Col xs={2}>
+                                    <Col xs={4} className="container-match-results">
+                        
                                     <div className="match-double-dot">:</div>
+                        
+                                    <input type="number" onChange={this.onChangeResultsOne} className="match-result-left"/>
+                        
+                                    <input type="number" onChange={this.onChangeResultsTwo} className="match-result-right"/>
+                        
                                     </Col>
                         
-                                    <Col className="col-result-right" xs={2}> 
-                                    <input type="number" onChange={this.onChangeResultsTwo} className="match-result"/>
-                                    </Col>
                         
-                                    <Col className="team-players" xs={3}> 
+                                    <Col className="team-players" xs={4}> 
                                     <textarea disabled className="team-players-area team-players-area-right">
-                                                                                                                                                                                                            {teamTwoPlayers}
+                                                                                                                                                                                                                                                                                    {teamTwoPlayers}
                                     </textarea>
                                     </Col>
                         
                                 </Row>
                                 <Row>
-                                    
+                        
                                     <button className="button-results-confirm" onClick={this.confirmMatchResults} >Confirm Results</button>
-                                    
+                        
                                 </Row>
                         
                             </Container>
