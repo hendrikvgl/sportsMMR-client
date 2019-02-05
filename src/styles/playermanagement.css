@@ -13,6 +13,7 @@ and open the template in the editor.
 }
 
 .fill-width {
+    display: flex;
     flex: 1;
 }
 

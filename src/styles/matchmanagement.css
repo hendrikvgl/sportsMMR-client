@@ -95,6 +95,7 @@ and open the template in the editor.
     padding: 8px;
     width: 100%;
     font-size: larger;
+    overflow: auto;
 }
 
 .team-players-area-right {
