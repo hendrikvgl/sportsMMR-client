@@ -26,16 +26,22 @@ export class SessionMonitor extends React.Component {
 
     noActiveSession() {
         return((
-                <Row className="row-session-monitor">
-                    <div className="standard-font session-info">
-                        No active Session.
-                    </div>
-                    {this.state.creationButton ? (
+                <div>
+                    <Row className="row-session-monitor">
+                        <div className="standard-font session-info">
+                            No active Session.
+                        </div>
+                
+                    </Row>
+                    <Row>
+                        {this.state.creationButton ? (
                                             <button onClick={this.onCreateSession} className="session-start-btn">
                                                 Start new.
-                                            </button>) :
-                                (<div/>)}
-                </Row>
+                                            </button>
+                                            ) :
+                                    (<div/>)}
+                    </Row>
+                </div>
                 ));
     }
 
