@@ -54,6 +54,7 @@ and open the template in the editor.
 .button-player-submit {
     height: 100%;
     background-color: #C3E2DD;
+    display:inline-block;
     border-radius: 0px 3px 3px 0px;
     border-width: 1px;
     border-style: none;
