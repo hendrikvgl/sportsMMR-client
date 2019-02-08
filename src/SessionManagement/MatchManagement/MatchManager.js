@@ -9,6 +9,7 @@ import '../../styles/matchmanagement.css';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import matchService from '../../DatabaseServices/MatchDbService';
+import playerService from '../../DatabaseServices/PlayerDbService';
 import { SessionMatchList } from './SessionMatchList';
 export class MatchManager extends React.Component {
 
@@ -23,6 +24,8 @@ export class MatchManager extends React.Component {
         this.confirmMatchResults = this.confirmMatchResults.bind(this);
         this.onMatchEndSuccessCallback = this.onMatchEndSuccessCallback.bind(this);
         this.onTMMRSuccessCallback = this.onTMMRSuccessCallback.bind(this);
+        this.onPlayersMMRSuccessCallback = this.onPlayersMMRSuccessCallback.bind(this);
+        this.onMatchOTC = this.onMatchOTC.bind(this);
     }
 
     componentWillMount() {
@@ -64,6 +67,58 @@ export class MatchManager extends React.Component {
         playershuffle.splice(0, bounder);
         teamTwo = playershuffle;
         matchService.postMatch(this.props.sessionId, teamOne, teamTwo, this.matchCreationSuccCallback, this.matchCreationErrorCallback);
+    }
+
+    onMatchOTC() {
+
+        let players = [];
+//        alert(JSON.stringify(this.props.players));
+
+        this.props.players.map(x => players.push(x));
+
+        playerService.getPlayersMMR(players, this.onPlayersMMRSuccessCallback, this.onPlayersMMRErrorCallback);
+    }
+
+    onPlayersMMRSuccessCallback(response) {
+        const players = response.data.data;
+
+        const playerCount = players.length;
+        
+        let teamOne = [];
+        let teamTwo = [];
+
+        const sortedPlayers = this.sortPlayerMMR(players);
+
+        //based on playground rules. Best two players are 'captains'. worst captain starts voting for best player available
+        if (playerCount >= 2) {
+            teamOne.push(sortedPlayers[0]);
+            teamTwo.push(sortedPlayers[1]);
+            let teamOneP = false;
+            
+            for (var i = 2; i < playerCount; i++) {
+                if (teamOneP) {
+                    teamOne.push(sortedPlayers[i]);
+                    teamOneP = false;
+                } else {
+                    teamTwo.push(sortedPlayers[i]);
+                    teamOneP = true;
+                }
+
+            }
+            matchService.postMatch(this.props.sessionId, teamOne, teamTwo, this.matchCreationSuccCallback, this.matchCreationErrorCallback);
+
+        } else {
+            alert("There need to be atleast 2 players in the session.");
+        }
+    }
+
+    sortPlayerMMR(players) {
+        players.sort((a, b) => parseFloat(b.mmr) - parseFloat(a.mmr));
+        return players;
+    }
+
+    onPlayersMMRErrorCallback(error) {
+
     }
 
     matchCreationSuccCallback(response) {
@@ -175,11 +230,15 @@ export class MatchManager extends React.Component {
             { !activeMatch ? (
                             <Container>
                                 <Row className="row-new-button">
-                        
                                     <Col>
                                     <button onClick={this.onMatchShuffle} className="match-button-new">New - Shuffle</button>
                                     </Col>
+                                </Row>
                         
+                                <Row className="row-new-button">
+                                    <Col>
+                                    <button onClick={this.onMatchOTC} className="match-button-new">New - OTC</button>
+                                    </Col>
                                 </Row>
                             </Container>
                                 ) : (
@@ -196,7 +255,7 @@ export class MatchManager extends React.Component {
                                 <Row flex={true} className="row-active-match" noGutters={true}>
                                     <Col className="team-players" xs={4}> 
                                     <textarea disabled className="team-players-area">
-                                                                                                                                                                {teamOnePlayers}
+                                                                                                                                                                                                                                                                                                                                                                {teamOnePlayers}
                                     </textarea>
                                     </Col>
                         
@@ -214,7 +273,7 @@ export class MatchManager extends React.Component {
                         
                                     <Col className="team-players" xs={4}> 
                                     <textarea disabled className="team-players-area team-players-area-right">
-                                                                                                                                                                {teamTwoPlayers}
+                                                                                                                                                                                                                                                                                                                                                                {teamTwoPlayers}
                                     </textarea>
                                     </Col>
                         

@@ -42,6 +42,17 @@ export default {
         }).catch((error) => {
             callbackErr(error);
         });
-    }
+    },
+    getPlayersMMR: function (players, callbackSucc, callbackErr) {
+        axios.post("http://"+url+"/api/playersmmr", {
+            data: {
+                players: players
+            }
+        }).then((response) => {
+            callbackSucc(response);
+        }).catch((error) => {
+            callbackErr(error);
+        });
+    } 
 
 }
