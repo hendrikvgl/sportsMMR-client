@@ -14,7 +14,7 @@ export class MatchManager extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {activeMatch: false, activeMatchId: null, teamOne: [], teamTwo: [], resultsOne: null, resultsTwo: null, matchListToggle: false};
+        this.state = {activeMatch: false, activeMatchId: null, teamOne: [], teamTwo: [], resultsOne: null, resultsTwo: null, matchListToggle: false, teamOneMMR: null, teamTwoMMR: null};
         this.getMatchesSuccessCallback = this.getMatchesSuccessCallback.bind(this);
         this.onMatchShuffle = this.onMatchShuffle.bind(this);
         this.matchCreationSuccCallback = this.matchCreationSuccCallback.bind(this);
@@ -22,6 +22,7 @@ export class MatchManager extends React.Component {
         this.onChangeResultsTwo = this.onChangeResultsTwo.bind(this);
         this.confirmMatchResults = this.confirmMatchResults.bind(this);
         this.onMatchEndSuccessCallback = this.onMatchEndSuccessCallback.bind(this);
+        this.onTMMRSuccessCallback = this.onTMMRSuccessCallback.bind(this);
     }
 
     componentWillMount() {
@@ -30,28 +31,20 @@ export class MatchManager extends React.Component {
 
     onChangeResultsOne(e) {
         const input = e.target.value;
-
-
         this.setState({resultsOne: input});
-
     }
 
     onChangeResultsTwo(e) {
         const input = e.target.value;
-
-
         this.setState({resultsTwo: input});
-
     }
 
     onMatchShuffle() {
 
         let players = [];
-
 //        alert(JSON.stringify(this.props.players));
 
         this.props.players.map(x => players.push(x));
-
         let playershuffle = this.shuffle(players);
         const playerCount = playershuffle.length;
         let teamOne = [];
@@ -93,12 +86,23 @@ export class MatchManager extends React.Component {
             activeMatchId = response.data.data._id;
         }
         this.setState({activeMatch: activeBool, teamOne: teamOne, teamTwo: teamTwo, activeMatchId: activeMatchId});
+        matchService.getTMMR(teamOne, teamTwo, this.onTMMRSuccessCallback, this.onTMMRErrorCallback);
+    }
+
+    onTMMRSuccessCallback(response) {
+
+        const teamOneMMR = response.data.teamOneMMR;
+        const teamTwoMMR = response.data.teamTwoMMR;
+        this.setState({teamOneMMR: teamOneMMR, teamTwoMMR: teamTwoMMR});
+    }
+
+    onTMMRErrorCallback(error) {
+
     }
 
     confirmMatchResults() {
         const resultOne = parseInt(this.state.resultsOne);
         const resultTwo = parseInt(this.state.resultsTwo);
-
         let winners = [];
         if (resultOne > resultTwo) {
             winners = this.state.teamOne;
@@ -129,13 +133,11 @@ export class MatchManager extends React.Component {
 
     shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
-
         while (0 !== currentIndex) {
 
 
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
-
             temporaryValue = array[currentIndex];
             array[currentIndex] = array[randomIndex];
             array[randomIndex] = temporaryValue;
@@ -153,6 +155,19 @@ export class MatchManager extends React.Component {
             this.state.teamTwo.map(x => teamTwoPlayers = teamTwoPlayers + x.label + "\n");
         }
 
+        let teamOnePerc = null;
+        let teamTwoPerc = null;
+        if (this.state.teamOneMMR !== null && this.state.teamTwoMMR !== null) {
+            teamOnePerc = this.state.teamOneMMR / (this.state.teamOneMMR + this.state.teamTwoMMR) * 100;
+            teamTwoPerc = 100 - teamOnePerc;
+        }
+
+        let teamOneProbStyle = {
+            width: teamOnePerc + '%'
+        };
+        let teamTwoProbStyle = {
+            width: teamTwoPerc + '%'
+        };
         return(<Container>
             <Row>
                 <div className="standard-font new-match-font">Matches</div>
@@ -172,11 +187,16 @@ export class MatchManager extends React.Component {
                                 <Row>
                                     <div className="standard-font active-match-font">Active Match</div>
                                 </Row>
-                        
+                                { teamOnePerc && teamTwoPerc ? (
+                                                            <Row flex={true} className="row-match-prob" noGutters={true}>
+                                                                <div style={teamOneProbStyle} className="win-prob win-prob-one">{teamOnePerc.toFixed(2)}</div>
+                                                                <div style={teamTwoProbStyle} className="win-prob win-prob-two">{teamTwoPerc.toFixed(2)}</div>
+                                                            </Row>
+                                                        ) : (<div/>)}
                                 <Row flex={true} className="row-active-match" noGutters={true}>
                                     <Col className="team-players" xs={4}> 
                                     <textarea disabled className="team-players-area">
-                                                                                                                                                                                                                                                                                    {teamOnePlayers}
+                                                                                                                                                                {teamOnePlayers}
                                     </textarea>
                                     </Col>
                         
@@ -194,7 +214,7 @@ export class MatchManager extends React.Component {
                         
                                     <Col className="team-players" xs={4}> 
                                     <textarea disabled className="team-players-area team-players-area-right">
-                                                                                                                                                                                                                                                                                    {teamTwoPlayers}
+                                                                                                                                                                {teamTwoPlayers}
                                     </textarea>
                                     </Col>
                         

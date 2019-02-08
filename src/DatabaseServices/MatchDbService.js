@@ -51,6 +51,16 @@ export default {
         }).catch((error) => {
             callbackError(error);
         });
+    },
+    getTMMR: function (teamOne, teamTwo, callbackSuccess, callbackError) {
+        axios.post("http://" + url + "/api/match/tmmr", {
+            teamOne: teamOne,
+            teamTwo: teamTwo
+        }).then((response) => {
+            callbackSuccess(response);
+        }).catch((error) => {
+            callbackError(error);
+        });
     }
 
 }
