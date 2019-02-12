@@ -38,7 +38,7 @@ export class PlayerManager extends React.Component {
                         <PlayerCreationContainer playerList={this.state.players} onCreation={this.handlePlayerChange} />
                     </Row>
                     <Row>
-                        <PlayerListContainer onDelete={this.handlePlayerChange} players={this.state.players}/>
+                        <PlayerListContainer admin={this.props.admin} onDelete={this.handlePlayerChange} players={this.state.players}/>
                     </Row>
                 </Container>)
                 );

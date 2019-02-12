@@ -30,7 +30,7 @@ export class SessionMatchList extends React.Component {
 
     onMatchLoadSuccessCallback(response) {
    
-        const matches = response.data.data;
+        const matches = response.data;
         let teamOne = [];
         let teamTwo = [];
         let results = [];

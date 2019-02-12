@@ -8,35 +8,50 @@ import url from "./dbConfig";
 
 export default {
     findActiveSession: function (callbackSuccess, callbackError) {
-        axios.get("http://" + url + "/api/session").then((response) => {
+        axios.get("http://" + url + "/api/session", {withCredentials: true}).then((response) => {
             callbackSuccess(response);
         }).catch((error) => {
             callbackError(error);
         });
     },
     findAllSessions: function (callbackSuccess, callbackError) {
-        axios.get("http://" + url + "/api/sessions").then((response) => {
+        axios.get("http://" + url + "/api/sessions", {withCredentials: true}).then((response) => {
             callbackSuccess(response);
         }).catch((error) => {
             callbackError(error);
         });
     },
     postSession: function (players, callbackSuccess, callbackError) {
-        axios.post("http://" + url + "/api/session", {
-            players: players
-        }).then((response) => {
-            callbackSuccess(response);
-        }).catch((error) => {
-            callbackError(error);
+        fetch("http://" + url + "/api/session", {
+            method: 'POST',
+            credentials: "include",
+            body: JSON.stringify({
+                players: players
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => res.json()).then((res) => {
+            callbackSuccess(res);
+        }).catch(err => {
+//            callbackError(err);
         });
+        
     },
     endSession: function (id, callbackSuccess, callbackError) {
-        axios.put("http://" + url + "/api/session", {
-            _id: id
-        }).then((response) => {
-            callbackSuccess(response);
-        }).catch((error) => {
-            callbackError(error);
+        fetch("http://" + url + "/api/session", {
+            method: 'PUT',
+            credentials: "include",
+            body: JSON.stringify({
+                _id: id
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => res.json()).then((res) => {
+            callbackSuccess(res);
+        }).catch(err => {
+//            callbackError(err);
         });
     }
 

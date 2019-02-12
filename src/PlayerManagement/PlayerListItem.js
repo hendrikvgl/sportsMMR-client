@@ -37,8 +37,10 @@ export class PlayerListItem extends React.Component {
                 <Row className="player-list-item">
                 
                     <div className="player-list-item-name" id="playerName">{this.props.json.name} - {this.props.json.mmr.toFixed(2)}</div>
-                                                
-                    <button className="player-delete-button" onClick={this.handleClick} >x</button>
+                
+                    {this.props.admin &&
+                                    <button className="player-delete-button" onClick={this.handleClick} >x</button>
+                    }
                 
                 </Row>
                 );

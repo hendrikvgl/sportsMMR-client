@@ -29,7 +29,7 @@ export class PlayerListContainer extends React.Component {
                 (
                 <Container className="container-player-list" >
                             {this.props.players.map(player => (
-                                                                <PlayerListItem onDelete={this.onDelete} json={JSON.parse(player)} />
+                                                                <PlayerListItem admin={this.props.admin} onDelete={this.onDelete} json={JSON.parse(player)} />
                                                     ))}
                         </Container>
                                 )

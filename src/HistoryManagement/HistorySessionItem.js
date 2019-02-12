@@ -35,7 +35,7 @@ export class HistorySessionItem extends React.Component {
     }
 
     onMatchFetchSuccessCallback(response) {
-        let matchesJSON = response.data.data;
+        let matchesJSON = response.data;
 
         var i;
         for (i = 0; i < matchesJSON.length; i++) {

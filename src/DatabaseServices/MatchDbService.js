@@ -9,7 +9,7 @@ import url from "./dbConfig";
 
 export default {
     findActiveMatch: function (callbackSuccess, callbackError) {
-        axios.get("http://" + url + "/api/activematch").then((response) => {
+        axios.get("http://" + url + "/api/activematch", {withCredentials: true}).then((response) => {
 
             callbackSuccess(response);
         }).catch((error) => {
@@ -18,49 +18,78 @@ export default {
         });
     },
     findSessionMatches: function (sessionId, callbackSuccess, callbackError) {
-        axios.post("http://" + url + "/api/matches", {
+        fetch('http://' + url + '/api/matches', {
+            method: 'POST',
+            credentials: "include",
+            body: JSON.stringify({
+                sessionId: sessionId
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => res.json()).then((res) => {
+            
+            callbackSuccess(res);
 
-            sessionId: sessionId
-
-        }).then((response) => {
-            callbackSuccess(response);
-        }).catch((error) => {
-            callbackError(error);
+        }).catch(err => {
+            console.error(err);
         });
     },
 
     postMatch: function (sessionId, teamOne, teamTwo, callbackSuccess, callbackError) {
-        axios.post("http://" + url + "/api/match", {
-            sessionId: sessionId,
-            teamOne: teamOne,
-            teamTwo: teamTwo
-        }).then((response) => {
-            callbackSuccess(response);
-        }).catch((error) => {
-            callbackError(error);
+        fetch("http://" + url + "/api/match", {
+            method: 'POST',
+            credentials: "include",
+            body: JSON.stringify({
+                sessionId: sessionId,
+                teamOne: teamOne,
+                teamTwo: teamTwo
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => res.json()).then((res) => {
+            callbackSuccess(res);
+        }).catch(err => {
+            callbackError(err);
         });
+       
     },
     endMatch: function (id, results, winners, callbackSuccess, callbackError) {
-        axios.put("http://" + url + "/api/match", {
-            _id: id,
-            results: results,
-            winners: winners
-
-        }).then((response) => {
-            callbackSuccess(response);
-        }).catch((error) => {
-            callbackError(error);
+        fetch("http://" + url + "/api/match", {
+            method: 'PUT',
+            credentials: "include",
+            body: JSON.stringify({
+                _id: id,
+                results: results,
+                winners: winners
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => res.json()).then((res) => {
+            callbackSuccess(res);
+        }).catch(err => {
+            callbackError(err);
         });
     },
     getTMMR: function (teamOne, teamTwo, callbackSuccess, callbackError) {
-        axios.post("http://" + url + "/api/match/tmmr", {
-            teamOne: teamOne,
-            teamTwo: teamTwo
-        }).then((response) => {
-            callbackSuccess(response);
-        }).catch((error) => {
-            callbackError(error);
+        fetch("http://" + url + "/api/match/tmmr", {
+            method: 'POST',
+            credentials: "include",
+            body: JSON.stringify({
+                teamOne: teamOne,
+                teamTwo: teamTwo
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => res.json()).then((res) => {
+            callbackSuccess(res);
+        }).catch(err => {
+            callbackError(err);
         });
+        
     }
 
 }

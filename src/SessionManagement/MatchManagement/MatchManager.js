@@ -80,7 +80,7 @@ export class MatchManager extends React.Component {
     }
 
     onPlayersMMRSuccessCallback(response) {
-        const players = response.data.data;
+        const players = response.data;
 
         const playerCount = players.length;
         
@@ -146,8 +146,8 @@ export class MatchManager extends React.Component {
 
     onTMMRSuccessCallback(response) {
 
-        const teamOneMMR = response.data.teamOneMMR;
-        const teamTwoMMR = response.data.teamTwoMMR;
+        const teamOneMMR = response.teamOneMMR;
+        const teamTwoMMR = response.teamTwoMMR;
         this.setState({teamOneMMR: teamOneMMR, teamTwoMMR: teamTwoMMR});
     }
 
