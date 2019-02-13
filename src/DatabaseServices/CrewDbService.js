@@ -63,13 +63,23 @@ export default {
         });
     },
     getCrewId: function (callbackSuccess, callbackError) {
-        axios.get("http://" + url + "/api/crew", {
-            withCredentials: true
-        }).then((response) => {
-            callbackSuccess(response);
-        }).catch((error) => {
-            callbackError(error);
+        fetch("http://" + url + "/api/crew", {
+            method: 'GET',
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if (res.status === 200) {
+                callbackSuccess(res);
+            } else {
+                callbackError(res.error);
+            }
+        }).catch(err => {
+            console.error(err);
+            alert('Error logging in please try again');
         });
+       
     }
     
 }
