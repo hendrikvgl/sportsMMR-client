@@ -65,7 +65,7 @@ export default {
     getCrewId: function (callbackSuccess, callbackError) {
         fetch("http://" + url + "/api/crew", {
             method: 'GET',
-            credentials: "include",
+            credentials: "same-origin",
             headers: {
                 'Content-Type': 'application/json'
             }
