@@ -74,6 +74,7 @@ export default {
             if (res.status === 200) {
                 callbackSuccess(res);
             } else {
+                alert("currently out of order");
                 callbackError(res.error);
             }
         }).catch(err => {
