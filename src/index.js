@@ -18,10 +18,7 @@ import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import "./styles/mainpage.css";
 import crewService from "./DatabaseServices/CrewDbService";
-
 document.body.style = 'background: ' + colorBranding.primaryBackground;
-
-
 class Index extends React.Component {
 
     constructor(props) {
@@ -69,7 +66,6 @@ class Index extends React.Component {
 
     onCrewLoginSuccess(response) {
         crewService.getCrewId(this.onCrewId, this.noCookie);
-
     }
 
     onCrewId(response) {
@@ -81,6 +77,7 @@ class Index extends React.Component {
     }
 
     onCrewLoginError(error) {
+        alert("Invalid login credentials.");
     }
 
     onLoginAdmin() {
@@ -123,10 +120,12 @@ class Index extends React.Component {
         const crewemail = this.state.newCrewEmail;
         const password = this.state.newCrewPassword;
         const adminpassword = this.state.newCrewAdminPassword;
-
-        crewService.postCrew(crewname, crewemail, password, adminpassword, this.onCrewSubmitSuccess, this.onCrewSubmitError)
-
+        crewService.postCrew(crewname, crewemail, password, adminpassword, this.onCrewSubmitSuccess, this.onCrewSubmitError);
         this.setState({newCrewName: "", newCrewEmail: "", newCrewPassword: "", newCrewAdminPassword: ""});
+    }
+
+    onCrewSubmitError() {
+        alert("Crew name or email already in use.");
     }
 
     onCrewSubmitSuccess() {
@@ -145,20 +144,20 @@ class Index extends React.Component {
 
         return component;
     }
-    
+
     onLogout() {
 
         crewService.logout(this.onLogoutSuccess, this.onLogoutError);
     }
-    
+
     onLogoutSuccess() {
         this.setState({crewId: null, admin: null});
     }
-    
+
     onLogoutError() {
-        
+
     }
-    
+
     crewContent() {
         return (
                 (
@@ -255,8 +254,15 @@ class Index extends React.Component {
                 </Row>
                 <Row><button onClick={this.onCrewSubmit} className="auth-button" >Create my Crew</button></Row>
             </Container>
+        
+            <Row>
+                <Col className="auth-header">
+                <h3>Disclaimer</h3>
+                HTTPS/SSL not set up yet. Don't use any sensitive passwords, as they are not encrypted between client and server. Passwords are stored hashed on the Database.
+                </Col>
+            </Row>
+        
         </Container>);
-
         if (this.state.crewId === null) {
             return loginForm;
         } else {
@@ -278,7 +284,7 @@ class Index extends React.Component {
                                 <h1 className="title">
                                     sportsMMR
                                 </h1>
-                                
+                        
                                 </Col>
                             </Row>
                         

@@ -18,7 +18,7 @@ export default {
         }).then((response) => {
             callbackSuccess(response);
         }).catch((error) => {
-//            callbackError(error);
+            callbackError(error);
         });
     },
     login: function (admin, name, password, callbackSuccess, callbackError) {
