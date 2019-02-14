@@ -8,13 +8,22 @@ import axios from "axios";
 import url from "./dbConfig";
 
 export default {
-    findActiveMatch: function (callbackSuccess, callbackError) {
-        axios.get("http://" + url + "/api/activematch", {withCredentials: true}).then((response) => {
+    findActiveMatch: function (sessionId, callbackSuccess, callbackError) {
+        fetch("http://" + url + "/api/activematch", {
+            method: 'POST',
+            credentials: "same-origin",
+            body: JSON.stringify({
+                sessionId: sessionId
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => res.json()).then((res) => {
 
-            callbackSuccess(response);
-        }).catch((error) => {
-//            alert(JSON.stringify(error));
-            callbackError(error);
+            callbackSuccess(res);
+
+        }).catch(err => {
+            callbackError(err);
         });
     },
     findSessionMatches: function (sessionId, callbackSuccess, callbackError) {
@@ -28,7 +37,7 @@ export default {
                 'Content-Type': 'application/json'
             }
         }).then((res) => res.json()).then((res) => {
-            
+
             callbackSuccess(res);
 
         }).catch(err => {
@@ -53,7 +62,7 @@ export default {
         }).catch(err => {
             callbackError(err);
         });
-       
+
     },
     endMatch: function (id, results, winners, callbackSuccess, callbackError) {
         fetch("http://" + url + "/api/match", {
@@ -89,7 +98,7 @@ export default {
         }).catch(err => {
             callbackError(err);
         });
-        
+
     }
 
 }

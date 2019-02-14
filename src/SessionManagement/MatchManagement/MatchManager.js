@@ -29,7 +29,7 @@ export class MatchManager extends React.Component {
     }
 
     componentWillMount() {
-        matchService.findActiveMatch(this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
+        matchService.findActiveMatch(this.props.sessionId, this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
     }
 
     onChangeResultsOne(e) {
@@ -122,7 +122,7 @@ export class MatchManager extends React.Component {
     }
 
     matchCreationSuccCallback(response) {
-        matchService.findActiveMatch(this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
+        matchService.findActiveMatch(this.props.sessionId, this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
     }
 
     matchCreationErrorCallback(error) {
@@ -177,7 +177,7 @@ export class MatchManager extends React.Component {
 
     onMatchEndSuccessCallback(response) {
         this.setState({matchListToggle: !this.state.matchListToggle});
-        matchService.findActiveMatch(this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
+        matchService.findActiveMatch(this.props.sessionId, this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
     }
 
     onMatchEndErrorCallback(error) {
