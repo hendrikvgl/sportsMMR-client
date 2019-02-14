@@ -72,7 +72,7 @@ class Index extends React.Component {
     onCrewId(response) {
         alert("crewId received");
         alert(JSON.stringify(response));
-        this.setState({crewId: response.data.id, admin: response.data.admin});
+        this.setState({crewId: response.id, admin: response.admin});
     }
 
     noCookie() {
