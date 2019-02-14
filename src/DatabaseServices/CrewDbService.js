@@ -70,7 +70,7 @@ export default {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => {
+        }).then((res) => res.json()).then((res) => {
             if (res.status === 200 || res.status === 304) {
                 callbackSuccess(res);
             } else {
@@ -81,7 +81,7 @@ export default {
             console.error(err);
             alert('Error logging in please try again');
         });
-       
+
     }
-    
+
 }
