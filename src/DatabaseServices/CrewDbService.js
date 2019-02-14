@@ -65,7 +65,6 @@ export default {
         fetch("http://" + url + "/api/crew", {
             method: 'GET',
             credentials: "same-origin",
-            mode: "cors",
             headers: {
                 'Content-Type': 'application/json'
             }
