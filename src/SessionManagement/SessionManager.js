@@ -80,11 +80,11 @@ export class SessionManager extends React.Component {
     }
 
     handleEndSession() {
-        matchService.findActiveMatch(this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
+        matchService.findActiveMatch(this.state.sessionId,this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
     }
 
     getMatchesSuccessCallback(response) {
-        if (response.data.data !== null) {
+        if (response.data !== null) {
             alert("Please finish all active matches first.");
         } else {
             sessionService.endSession(this.state.sessionId, this.onEndSessionSuccessCallback, this.onEndSessionErrorCallback);
