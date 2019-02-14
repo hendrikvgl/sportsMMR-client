@@ -69,18 +69,9 @@ export default {
                 'Content-Type': 'application/json'
             }
         }).then((res) => {
-            if (res.status === 200 || res.status === 304) {
-                res.json();
-            } else {
-                alert("currently out of order");
-                callbackError(res.error);
-                return;
-            }
-        }).then((res) => {
             callbackSuccess(res);
         }).catch(err => {
-            console.error(err);
-            alert('Error logging in please try again');
+            callbackError(err);
         });
     }
 
