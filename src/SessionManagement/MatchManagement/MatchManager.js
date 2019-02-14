@@ -135,11 +135,11 @@ export class MatchManager extends React.Component {
         let teamTwo = [];
         let activeMatchId = "";
 
-        if (response.data.data !== null) {
+        if (response.data !== null) {
             activeBool = true;
-            teamOne = response.data.data.teamOne;
-            teamTwo = response.data.data.teamTwo;
-            activeMatchId = response.data.data._id;
+            teamOne = response.data.teamOne;
+            teamTwo = response.data.teamTwo;
+            activeMatchId = response.data._id;
             matchService.getTMMR(teamOne, teamTwo, this.onTMMRSuccessCallback, this.onTMMRErrorCallback);
         }
         this.setState({activeMatch: activeBool, teamOne: teamOne, teamTwo: teamTwo, activeMatchId: activeMatchId});
