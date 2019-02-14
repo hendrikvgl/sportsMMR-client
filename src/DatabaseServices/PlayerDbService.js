@@ -7,7 +7,7 @@ import axios from "axios";
 import url from "./dbConfig";
 export default {
     getPlayers: function (callback) {
-        fetch('http://' + url + '/api/players', {
+        fetch('/api/players', {
             method: 'GET',
             credentials: "same-origin",
             headers: {
@@ -23,7 +23,7 @@ export default {
     },
 
     postPlayer: function (name, callbackSucc, callbackErr) {
-        fetch('http://' + url + '/api/player', {
+        fetch('/api/player', {
             method: 'POST',
             credentials: "same-origin",
             body: JSON.stringify({
@@ -40,7 +40,7 @@ export default {
     },
     deletePlayer: function (id, callbackSucc, callbackErr) {
 
-        axios.delete("http://" + url + "/api/player", {
+        axios.delete("/api/player", {
             withCredentials: true,
             data: {
                 _id: id
@@ -52,7 +52,7 @@ export default {
         });
     },
     getPlayersMMR: function (players, callbackSucc, callbackErr) {
-        fetch("http://" + url + "/api/playersmmr", {
+        fetch("/api/playersmmr", {
             method: 'POST',
             credentials: "include",
             body: JSON.stringify({

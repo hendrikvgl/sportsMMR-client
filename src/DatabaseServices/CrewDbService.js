@@ -9,7 +9,7 @@ import axios from "axios";
 import url from "./dbConfig";
 export default {
     postCrew: function (name, email, password, adminPassword, callbackSuccess, callbackError) {
-        axios.post("http://" + url + "/api/crew", {
+        axios.post("/api/crew", {
             name: name,
             email: email,
             password: password,
@@ -21,7 +21,7 @@ export default {
         });
     },
     login: function (admin, name, password, callbackSuccess, callbackError) {
-        fetch('http://' + url + '/api/auth', {
+        fetch('/api/auth', {
             method: 'POST',
             credentials: "same-origin",
             body: JSON.stringify({
@@ -44,7 +44,7 @@ export default {
         });
     },
     logout: function (callbackSuccess, callbackError) {
-        fetch('http://' + url + '/api/logout', {
+        fetch('/api/logout', {
             method: 'POST',
             credentials: "same-origin",
             headers: {
@@ -62,7 +62,7 @@ export default {
         });
     },
     getCrewId: function (callbackSuccess, callbackError) {
-        fetch("http://" + url + "/api/crew", {
+        fetch("/api/crew", {
             method: 'GET',
             credentials: "same-origin",
             headers: {

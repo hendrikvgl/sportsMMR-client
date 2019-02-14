@@ -8,21 +8,21 @@ import url from "./dbConfig";
 
 export default {
     findActiveSession: function (callbackSuccess, callbackError) {
-        axios.get("http://" + url + "/api/session", {withCredentials: true}).then((response) => {
+        axios.get("/api/session", {withCredentials: true}).then((response) => {
             callbackSuccess(response);
         }).catch((error) => {
             callbackError(error);
         });
     },
     findAllSessions: function (callbackSuccess, callbackError) {
-        axios.get("http://" + url + "/api/sessions", {withCredentials: true}).then((response) => {
+        axios.get("/api/sessions", {withCredentials: true}).then((response) => {
             callbackSuccess(response);
         }).catch((error) => {
             callbackError(error);
         });
     },
     postSession: function (players, callbackSuccess, callbackError) {
-        fetch("http://" + url + "/api/session", {
+        fetch("/api/session", {
             method: 'POST',
             credentials: "same-origin",
             body: JSON.stringify({
@@ -39,7 +39,7 @@ export default {
         
     },
     endSession: function (id, callbackSuccess, callbackError) {
-        fetch("http://" + url + "/api/session", {
+        fetch("/api/session", {
             method: 'PUT',
             credentials: "same-origin",
             body: JSON.stringify({

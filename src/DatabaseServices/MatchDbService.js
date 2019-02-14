@@ -9,7 +9,7 @@ import url from "./dbConfig";
 
 export default {
     findActiveMatch: function (sessionId, callbackSuccess, callbackError) {
-        fetch("http://" + url + "/api/activematch", {
+        fetch("/api/activematch", {
             method: 'POST',
             credentials: "same-origin",
             body: JSON.stringify({
@@ -27,7 +27,7 @@ export default {
         });
     },
     findSessionMatches: function (sessionId, callbackSuccess, callbackError) {
-        fetch('http://' + url + '/api/matches', {
+        fetch('/api/matches', {
             method: 'POST',
             credentials: "same-origin",
             body: JSON.stringify({
@@ -46,7 +46,7 @@ export default {
     },
 
     postMatch: function (sessionId, teamOne, teamTwo, callbackSuccess, callbackError) {
-        fetch("http://" + url + "/api/match", {
+        fetch("/api/match", {
             method: 'POST',
             credentials: "same-origin",
             body: JSON.stringify({
@@ -65,7 +65,7 @@ export default {
 
     },
     endMatch: function (id, results, winners, callbackSuccess, callbackError) {
-        fetch("http://" + url + "/api/match", {
+        fetch("/api/match", {
             method: 'PUT',
             credentials: "same-origin",
             body: JSON.stringify({
@@ -83,7 +83,7 @@ export default {
         });
     },
     getTMMR: function (teamOne, teamTwo, callbackSuccess, callbackError) {
-        fetch("http://" + url + "/api/match/tmmr", {
+        fetch("/api/match/tmmr", {
             method: 'POST',
             credentials: "same-origin",
             body: JSON.stringify({
