@@ -71,7 +71,7 @@ export default {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
-            if (res.status === 200) {
+            if (res.status === 200 || res.status === 304) {
                 callbackSuccess(res);
             } else {
                 alert("currently out of order");
