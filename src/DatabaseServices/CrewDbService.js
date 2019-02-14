@@ -68,7 +68,7 @@ export default {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then((res) => {
+        }).then((res) => res.json()).then((res) => {
             callbackSuccess(res);
         }).catch(err => {
             callbackError(err);
