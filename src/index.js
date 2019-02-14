@@ -65,11 +65,12 @@ class Index extends React.Component {
     }
 
     onCrewLoginSuccess(response) {
+        alert("login received");
         crewService.getCrewId(this.onCrewId, this.noCookie);
     }
 
     onCrewId(response) {
-
+        alert("crewId received");
         this.setState({crewId: response.data.id, admin: response.data.admin});
     }
 
