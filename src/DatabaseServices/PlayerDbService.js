@@ -9,7 +9,7 @@ export default {
     getPlayers: function (callback) {
         fetch('http://' + url + '/api/players', {
             method: 'GET',
-            credentials: "include",
+            credentials: "same-origin",
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -25,7 +25,7 @@ export default {
     postPlayer: function (name, callbackSucc, callbackErr) {
         fetch('http://' + url + '/api/player', {
             method: 'POST',
-            credentials: "include",
+            credentials: "same-origin",
             body: JSON.stringify({
                 name: name
             }),

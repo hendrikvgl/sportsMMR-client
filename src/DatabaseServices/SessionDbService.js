@@ -24,7 +24,7 @@ export default {
     postSession: function (players, callbackSuccess, callbackError) {
         fetch("http://" + url + "/api/session", {
             method: 'POST',
-            credentials: "include",
+            credentials: "same-origin",
             body: JSON.stringify({
                 players: players
             }),
@@ -41,7 +41,7 @@ export default {
     endSession: function (id, callbackSuccess, callbackError) {
         fetch("http://" + url + "/api/session", {
             method: 'PUT',
-            credentials: "include",
+            credentials: "same-origin",
             body: JSON.stringify({
                 _id: id
             }),

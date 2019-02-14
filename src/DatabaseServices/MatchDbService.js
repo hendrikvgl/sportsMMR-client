@@ -20,7 +20,7 @@ export default {
     findSessionMatches: function (sessionId, callbackSuccess, callbackError) {
         fetch('http://' + url + '/api/matches', {
             method: 'POST',
-            credentials: "include",
+            credentials: "same-origin",
             body: JSON.stringify({
                 sessionId: sessionId
             }),
@@ -39,7 +39,7 @@ export default {
     postMatch: function (sessionId, teamOne, teamTwo, callbackSuccess, callbackError) {
         fetch("http://" + url + "/api/match", {
             method: 'POST',
-            credentials: "include",
+            credentials: "same-origin",
             body: JSON.stringify({
                 sessionId: sessionId,
                 teamOne: teamOne,
@@ -58,7 +58,7 @@ export default {
     endMatch: function (id, results, winners, callbackSuccess, callbackError) {
         fetch("http://" + url + "/api/match", {
             method: 'PUT',
-            credentials: "include",
+            credentials: "same-origin",
             body: JSON.stringify({
                 _id: id,
                 results: results,
@@ -76,7 +76,7 @@ export default {
     getTMMR: function (teamOne, teamTwo, callbackSuccess, callbackError) {
         fetch("http://" + url + "/api/match/tmmr", {
             method: 'POST',
-            credentials: "include",
+            credentials: "same-origin",
             body: JSON.stringify({
                 teamOne: teamOne,
                 teamTwo: teamTwo

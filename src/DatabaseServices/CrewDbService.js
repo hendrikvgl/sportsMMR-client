@@ -24,7 +24,7 @@ export default {
     login: function (admin, name, password, callbackSuccess, callbackError) {
         fetch('http://' + url + '/api/auth', {
             method: 'POST',
-            credentials: "include",
+            credentials: "same-origin",
             body: JSON.stringify({
                 admin: admin,
                 name: name,
@@ -47,7 +47,7 @@ export default {
     logout: function (callbackSuccess, callbackError) {
         fetch('http://' + url + '/api/logout', {
             method: 'POST',
-            credentials: "include",
+            credentials: "same-origin",
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -65,7 +65,7 @@ export default {
     getCrewId: function (callbackSuccess, callbackError) {
         fetch("http://" + url + "/api/crew", {
             method: 'GET',
-            credentials: "include",
+            credentials: "same-origin",
             mode: "cors",
             headers: {
                 'Content-Type': 'application/json'
