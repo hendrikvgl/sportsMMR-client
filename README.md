@@ -3,10 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Dependencies 
-npm install --save bootstrap
-npm install react-bootstrap@next bootstrap
-
-npm install @kenshooui/react-multi-select --save
+included in package.json
 ## Available Scripts
 
 In the project directory, you can run:
