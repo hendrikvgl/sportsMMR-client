@@ -5,7 +5,7 @@
  */
 
 import axios from "axios";
-import url from "./dbConfig";
+
 
 export default {
     findActiveMatch: function (sessionId, callbackSuccess, callbackError) {

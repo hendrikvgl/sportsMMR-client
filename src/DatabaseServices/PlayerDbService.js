@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 import axios from "axios";
-import url from "./dbConfig";
+
 export default {
     getPlayers: function (callback) {
         fetch('/api/players', {

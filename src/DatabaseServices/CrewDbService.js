@@ -6,7 +6,7 @@
 
 
 import axios from "axios";
-import url from "./dbConfig";
+
 export default {
     postCrew: function (name, email, password, adminPassword, callbackSuccess, callbackError) {
         axios.post("/api/crew", {
