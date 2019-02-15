@@ -87,8 +87,6 @@ export class MatchManager extends React.Component {
     }
 
     onMostRecentSuccess(response) {
-        
-        alert(JSON.stringify(response));
  
         let teamOne = null;
         let teamTwo = null;
