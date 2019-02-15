@@ -44,12 +44,12 @@ export class SessionManager extends React.Component {
     }
 
     onSessionQuerySuccess(response) {
-        
+
         let activeBool = false;
         let sessionPlayers = [{}];
 //         let sessionPlayers = [];
         let sessionId = "";
-        
+
 
         if (response.data.data !== null) {
             activeBool = true;
@@ -57,7 +57,7 @@ export class SessionManager extends React.Component {
             sessionId = response.data.data._id;
         }
 
-        this.setState({activeSession: activeBool, sessionPlayers: sessionPlayers, sessionId: sessionId, rerender: !this.state.rerender });
+        this.setState({activeSession: activeBool, sessionPlayers: sessionPlayers, sessionId: sessionId, rerender: !this.state.rerender});
     }
 
     onSessionQueryError(error) {
@@ -80,7 +80,7 @@ export class SessionManager extends React.Component {
     }
 
     handleEndSession() {
-        matchService.findActiveMatch(this.state.sessionId,this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
+        matchService.findActiveMatch(this.state.sessionId, this.getMatchesSuccessCallback, this.getMatchesErrorCallback);
     }
 
     getMatchesSuccessCallback(response) {
@@ -112,10 +112,12 @@ export class SessionManager extends React.Component {
                 (
                         <div>
                             <div>
-                                <SessionMonitor onEndSession={this.handleEndSession} onCreateSession={this.onCreateSession} activeSession={this.state.activeSession} sessionPlayers={this.state.sessionPlayers} />
+                                <SessionMonitor onCreateSession={this.onCreateSession} activeSession={this.state.activeSession} sessionPlayers={this.state.sessionPlayers} />
                                 {activeSession ? (
                                                             <div>
-                                                                <MatchManager sessionId={this.state.sessionId} players={ this.state.sessionPlayers } /></div>
+                                                                <MatchManager sessionId={this.state.sessionId} players={ this.state.sessionPlayers } />
+                                                                <button onClick={this.handleEndSession} className="session-button-end">End Session</button>
+                                                            </div>
                                                     ) : <div/>}
                             </div>
                         
@@ -127,6 +129,7 @@ export class SessionManager extends React.Component {
                                                         </div>
                                                     </div>
                                         ) : <div/> } 
+                        
                         </div>
                         )
                 );

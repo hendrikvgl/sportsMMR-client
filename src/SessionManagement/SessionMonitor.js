@@ -17,6 +17,7 @@ export class SessionMonitor extends React.Component {
         super(props);
         this.onCreateSession = this.onCreateSession.bind(this);
         this.state = {creationButton: true};
+        this.renderPlayers = this.renderPlayers.bind(this);
     }
 
     onCreateSession() {
@@ -45,19 +46,31 @@ export class SessionMonitor extends React.Component {
                 ));
     }
 
+    renderPlayers() {
+        const players = this.props.sessionPlayers;
+        let playerArray = [];
+        
+        for (var i = 0; i<players.length; i++) {
+            const playerDOM = (<div className="item-player"> {players[i].label}</div>);
+            playerArray.push(playerDOM);
+        }
+        
+        return playerArray;
+    }
+
     activeSession() {
-        let playerstring = "";
-        this.props.sessionPlayers.map(x => playerstring = playerstring + " " + x.label);
+        
         return(
                 (<div>
                     <Row className="standard-font session-info">
-                        Active Session.
-                
-                        <button onClick={this.props.onEndSession} className="session-button-end">End Session</button>
+                        Active Session
                     </Row>
-                    <div className="standard-font session-players">
-                        Players: {playerstring}
-                    </div>
+                    <Row className="standard-font session-players">
+                        Players
+                    </Row>
+                    <Row>
+                        {this.renderPlayers()}
+                    </Row>
                 </div>)
                 );
     }

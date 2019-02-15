@@ -18,11 +18,11 @@ and open the template in the editor.
 
 .session-players {
     font-size: large;
+    margin-bottom: 5px;
 }
 
 .session-button-end {
-    margin-left: auto;
-    margin-right: 0;
+    width: 100%;
     color: black;
     background-color: #C3E2DD;
     border-radius: 3px 3px 3px 3px;
@@ -31,6 +31,7 @@ and open the template in the editor.
     border-color: transparent;
     border-image: none;
     font-size: 15px;
+    margin-bottom: 15px;
 }
 
 .session-button-end:active {
@@ -71,6 +72,17 @@ and open the template in the editor.
     font-size: large;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.item-player {
+    padding: 5px;
+    font-size: 15px;
+    border-width: 1px;
+    border-color: #2C4251;
+    border-style: solid;
+    background-color: #25626B;
+    color: #e1eff6;
+    margin: 2px;
 }
 
 .button-session-init:active {
