@@ -114,7 +114,7 @@ export class SessionManager extends React.Component {
                             <div>
                                 <SessionMonitor onEndSession={this.handleEndSession} onCreateSession={this.onCreateSession} activeSession={this.state.activeSession} sessionPlayers={this.state.sessionPlayers} />
                                 {activeSession ? (
-                                                            <div><hr className="border-line" />
+                                                            <div>
                                                                 <MatchManager sessionId={this.state.sessionId} players={ this.state.sessionPlayers } /></div>
                                                     ) : <div/>}
                             </div>

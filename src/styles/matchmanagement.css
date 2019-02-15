@@ -115,6 +115,8 @@ and open the template in the editor.
     left: 0;
 }
 
+
+
 .team-players-area {
     background-color: transparent;
     border-style: none;
@@ -183,9 +185,55 @@ and open the template in the editor.
     background-color: #9DB7B2;
 }
 
-.match-button-new {
-    width: 100%;
+.carousel-modes {
+    height: 120px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.carousel-item-content {
+    margin-left: 15%;
+    width: 70%;
     height: 100%;
+    position: absolute;
+}
+
+.modes-descr {
+    max-height: 65px;
+    width: 100%;
+    padding: 4px;
+    text-align: center;
+    color: #e1eff6;
+    font-size: 12px;
+}
+
+.border-line {
+    border: 1px solid #e1eff6;
+    border-radius: 2px;
+}
+
+.modes-title {
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    color: #e1eff6;
+}
+
+.carousel-item {
+    height: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+.match-button-new {
+    position: absolute;
+    height: 25px;
+    right: 15%;
+    left: 15%;
+    width: 70%;
+    bottom: 0px;
     color: black;
     background-color: #C3E2DD;
     border-radius: 3px 3px 3px 3px;

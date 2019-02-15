@@ -99,6 +99,23 @@ export default {
             callbackError(err);
         });
 
+    },
+    getMostRecentSessionMatch: function (sessionId, callbackSuccess, callbackError) {
+        fetch("/api/match/mostrecent", {
+            method: 'POST',
+            credentials: "same-origin",
+            body: JSON.stringify({
+                sessionId: sessionId,
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => res.json()).then((res) => {
+            callbackSuccess(res);
+        }).catch(err => {
+            callbackError(err);
+        });
+
     }
 
 }

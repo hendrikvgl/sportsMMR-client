@@ -11,6 +11,8 @@ import Col from 'react-bootstrap/lib/Col';
 import matchService from '../../DatabaseServices/MatchDbService';
 import playerService from '../../DatabaseServices/PlayerDbService';
 import { SessionMatchList } from './SessionMatchList';
+import Carousel from 'react-bootstrap/lib/Carousel'
+
 export class MatchManager extends React.Component {
 
     constructor(props) {
@@ -26,6 +28,8 @@ export class MatchManager extends React.Component {
         this.onTMMRSuccessCallback = this.onTMMRSuccessCallback.bind(this);
         this.onPlayersMMRSuccessCallback = this.onPlayersMMRSuccessCallback.bind(this);
         this.onMatchOTC = this.onMatchOTC.bind(this);
+        this.onMatchRematch = this.onMatchRematch.bind(this);
+        this.onMostRecentSuccess = this.onMostRecentSuccess.bind(this);
     }
 
     componentWillMount() {
@@ -75,26 +79,48 @@ export class MatchManager extends React.Component {
 //        alert(JSON.stringify(this.props.players));
 
         this.props.players.map(x => players.push(x));
-
         playerService.getPlayersMMR(players, this.onPlayersMMRSuccessCallback, this.onPlayersMMRErrorCallback);
+    }
+
+    onMatchRematch() {
+        matchService.getMostRecentSessionMatch(this.props.sessionId, this.onMostRecentSuccess, this.onMostRecentError);
+    }
+
+    onMostRecentSuccess(response) {
+        
+        alert(JSON.stringify(response));
+ 
+        let teamOne = null;
+        let teamTwo = null;
+
+        if (response.hasOwnProperty('data')) {
+            teamOne = response.data.teamOne;
+            teamTwo = response.data.teamTwo;
+        }
+
+
+        if (teamOne !== null && teamTwo !== null) {
+            matchService.postMatch(this.props.sessionId, teamOne, teamTwo, this.matchCreationSuccCallback, this.matchCreationErrorCallback);
+        } else {
+            alert("There seems to be no match in this session to replay.");
+        }
+    }
+
+    onMostRecentError(error) {
+
     }
 
     onPlayersMMRSuccessCallback(response) {
         const players = response.data;
-
         const playerCount = players.length;
-        
         let teamOne = [];
         let teamTwo = [];
-
         const sortedPlayers = this.sortPlayerMMR(players);
-
         //based on playground rules. Best two players are 'captains'. worst captain starts voting for best player available
         if (playerCount >= 2) {
             teamOne.push(sortedPlayers[0]);
             teamTwo.push(sortedPlayers[1]);
             let teamOneP = false;
-            
             for (var i = 2; i < playerCount; i++) {
                 if (teamOneP) {
                     teamOne.push(sortedPlayers[i]);
@@ -106,7 +132,6 @@ export class MatchManager extends React.Component {
 
             }
             matchService.postMatch(this.props.sessionId, teamOne, teamTwo, this.matchCreationSuccCallback, this.matchCreationErrorCallback);
-
         } else {
             alert("There need to be atleast 2 players in the session.");
         }
@@ -134,7 +159,6 @@ export class MatchManager extends React.Component {
         let teamOne = [];
         let teamTwo = [];
         let activeMatchId = "";
-
         if (response.data !== null) {
             activeBool = true;
             teamOne = response.data.teamOne;
@@ -143,7 +167,6 @@ export class MatchManager extends React.Component {
             matchService.getTMMR(teamOne, teamTwo, this.onTMMRSuccessCallback, this.onTMMRErrorCallback);
         }
         this.setState({activeMatch: activeBool, teamOne: teamOne, teamTwo: teamTwo, activeMatchId: activeMatchId});
-        
     }
 
     onTMMRSuccessCallback(response) {
@@ -203,6 +226,53 @@ export class MatchManager extends React.Component {
         return array;
     }
 
+    renderMatchModes() {
+        const html = (
+                <div>
+                    <hr className="border-line" />
+                
+                    <Carousel className="carousel-modes" wrap={true} interval={null} indicators={false}>
+                        <Carousel.Item>
+                            <div className="carousel-item-content">
+                                <div className="modes-title">
+                                    Shuffle mode
+                                </div>
+                                <div className="modes-descr" >
+                                    Play a match with random teams.
+                                </div>
+                                <button onClick={this.onMatchShuffle} className="match-button-new">Enter the Court</button>
+                            </div>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <div className="carousel-item-content">
+                                <div className="modes-title">
+                                    OTC mode
+                                </div>
+                                <div className="modes-descr" >
+                                    Play a match with the most optimal team composition.
+                                </div>
+                                <button onClick={this.onMatchOTC} className="match-button-new">Enter the Court</button>
+                            </div>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <div className="carousel-item-content">
+                                <div className="modes-title">
+                                    Rematch mode
+                                </div>
+                                <div className="modes-descr" >
+                                    Go again with the most recent matchup.
+                                </div>
+                                <button onClick={this.onMatchRematch} className="match-button-new">Enter the Court</button>
+                            </div>
+                        </Carousel.Item>
+                    </Carousel>
+                    <hr className="border-line" />
+                </div>
+                );
+
+        return html;
+    }
+
     render() {
         const activeMatch = this.state.activeMatch;
         let teamOnePlayers = "";
@@ -226,23 +296,16 @@ export class MatchManager extends React.Component {
             width: teamTwoPerc + '%'
         };
         return(<Container>
-            <Row>
-                <div className="standard-font new-match-font">Matches</div>
-            </Row>
+        
             { !activeMatch ? (
-                            <Container>
-                                <Row className="row-new-button">
-                                    <Col>
-                                    <button onClick={this.onMatchShuffle} className="match-button-new">New - Shuffle</button>
-                                    </Col>
+                            <div>
+                                <Row>
+                                    <div className="standard-font active-match-font">Start new match</div>
                                 </Row>
                         
-                                <Row className="row-new-button">
-                                    <Col>
-                                    <button onClick={this.onMatchOTC} className="match-button-new">New - OTC</button>
-                                    </Col>
-                                </Row>
-                            </Container>
+                                {this.renderMatchModes()}
+                        
+                            </div>
                                 ) : (
                             <Container flex={true}>
                                 <Row>
@@ -257,7 +320,7 @@ export class MatchManager extends React.Component {
                                 <Row flex={true} className="row-active-match" noGutters={true}>
                                     <Col className="team-players" xs={4}> 
                                     <textarea disabled className="team-players-area">
-                                                                                                                                                                                                                                                                                                                                                                {teamOnePlayers}
+                                                                                                                                                                                                                                                                                                                {teamOnePlayers}
                                     </textarea>
                                     </Col>
                         
@@ -275,7 +338,7 @@ export class MatchManager extends React.Component {
                         
                                     <Col className="team-players" xs={4}> 
                                     <textarea disabled className="team-players-area team-players-area-right">
-                                                                                                                                                                                                                                                                                                                                                                {teamTwoPlayers}
+                                                                                                                                                                                                                                                                                                                {teamTwoPlayers}
                                     </textarea>
                                     </Col>
                         
