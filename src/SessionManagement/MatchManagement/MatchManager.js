@@ -304,7 +304,7 @@ export class MatchManager extends React.Component {
                         <Carousel.Item>
                             <div className="carousel-item-content">
                                 <div className="modes-title">
-                                    Custom Teams mode
+                                    Custom mode
                                 </div>
                                 <div className="modes-descr" >
                                     Play a match with your custom lineup.
