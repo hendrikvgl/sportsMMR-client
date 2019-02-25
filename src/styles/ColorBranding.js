@@ -5,11 +5,6 @@
  */
 
 export const colorBranding = {
-  primaryBackground: '#2c4251',
-  primaryFont: '#e1eff6',
-  primaryDetailBlue: '#7fbeeb',
-  primaryDetailGreen: '#9ad5ca',
-  primaryAttention: '#e54b4b'
-// tealblue #468189
-  // your colors
+  primaryBackground: '#2c4251'
+//    primaryBackground: '#EFEFED'
 }

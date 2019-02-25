@@ -8,8 +8,10 @@ and open the template in the editor.
     Author     : hevo
 */
 
+@import "ColorBranding.css";
+
 .standard-font {
-    color: #e1eff6;
+    color: var(--main-font);
 }
 
 .session-info {
@@ -24,7 +26,7 @@ and open the template in the editor.
 .session-button-end {
     width: 100%;
     color: black;
-    background-color: #C3E2DD;
+    background-color: var(--main-button);
     border-radius: 3px 3px 3px 3px;
     border-width: 1px;
     border-style: none;
@@ -47,7 +49,7 @@ and open the template in the editor.
     margin-left: auto;
     margin-right: 0;
     height: 100%;
-    background-color: #C3E2DD;
+    background-color: var(--main-button);
     border-radius: 3px 3px 3px 3px;
     border-width: 1px;
     border-style: none;
@@ -62,7 +64,7 @@ and open the template in the editor.
 
 .button-session-init {
     height: 30px;
-    background-color: #C3E2DD;
+    background-color: var(--main-button);
     width: 100%;
     border-radius: 3px 3px 3px 3px;
     border-width: 1px;
@@ -78,10 +80,10 @@ and open the template in the editor.
     padding: 5px;
     font-size: 15px;
     border-width: 1px;
-    border-color: #2C4251;
+    border-color: var(--main-border-item);
     border-style: solid;
-    background-color: #25626B;
-    color: #e1eff6;
+    background-color: var(--main-bg-item);
+    color: var(--main-font);
     margin: 2px;
 }
 

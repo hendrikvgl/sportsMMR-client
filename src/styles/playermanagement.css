@@ -8,6 +8,8 @@ and open the template in the editor.
     Author     : hevo
 */
 
+@import "ColorBranding.css";
+
 .flex-container {
     display: flex;
 }
@@ -30,9 +32,9 @@ and open the template in the editor.
     /*display: inline-block;*/
     height: 50px;
     padding: 5px;
-    border-color: #2C4251;
+    border-color: var(--main-border-item);
     border-style: solid;
-    background-color: #25626B;
+    background-color: var(--main-bg-item);
 }
 
 .container-player-list {
@@ -41,18 +43,18 @@ and open the template in the editor.
 }
 
 .standard-font {
-    color: #e1eff6;
+    color: var(--main-font);
 }
 
 .player-list-item-name {
-    color: #E1EFF6;
+    color: var(--main-font);
     font-size: x-large;
     width: auto;
 }
 
 .button-player-submit {
     height: 100%;
-    background-color: #C3E2DD;
+    background-color: var(--main-button);
     display: inline-block;
     width: 30%;
     border-radius: 0px 3px 3px 0px;
@@ -78,7 +80,7 @@ and open the template in the editor.
     margin-right:0;
     height: 100%;
     width: 30px;
-    background-color: #C3E2DD;
+    background-color: var(--main-button);
     border-radius: 3px 3px 3px 3px;
     border-width: 1px;
     border-style: none;

@@ -7,11 +7,11 @@ and open the template in the editor.
     Created on : 24 Jan 2019, 17:39:56
     Author     : hevo
 */
-
+@import "ColorBranding.css";
 
 .title {
     margin-top: 20px;
-    color: #e1eff6;
+    color: var(--main-font);
     text-align: center;
 
 }
@@ -28,13 +28,13 @@ container-logo {
 }
 
 .subtitle {
-    color: #e1eff6;
+    color: var(--main-font);
     text-align: center;
     margin-bottom: 20px;
 }
 
 .dummy {
-    background-color: #468189;
+    background-color: var(--main-bg-container);
     border-radius: 10px;
     margin-bottom: 20px;
 }
@@ -50,7 +50,7 @@ container-logo {
 }
 
 .auth-header {
-    color: #e1eff6;
+    color: var(--main-font);
     text-align: center;
     font-size: 18px;
     margin-bottom: 15px;
@@ -62,7 +62,7 @@ container-logo {
     margin-top: 15px;
     height: 25px;
     color: black;
-    background-color: #C3E2DD;
+    background-color: var(--main-button);
     border-radius: 3px 3px 3px 3px;
     border-width: 1px;
     border-style: none;
@@ -76,7 +76,7 @@ container-logo {
 }
 
 .auth-cont-login {
-    background-color: #468189;
+    background-color: var(--main-bg-container);
     border-radius: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -84,7 +84,7 @@ container-logo {
 }
 
 .auth-cont-register {
-    background-color: #468189;
+    background-color: var(--main-bg-container);
     border-radius: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -92,14 +92,14 @@ container-logo {
 }
 
 .auth-header-sub {
-    color: #e1eff6;
+    color: var(--main-font);
     text-align: center;
     font-size: 14px;
     margin-bottom: 10px;
 }
 
 .auth-label {
-    color: #e1eff6;
+    color: var(--main-font);
     text-align: center;
     font-size: 12px;
     margin-bottom: 4px;
@@ -112,7 +112,7 @@ container-logo {
     margin-right: 15px;
     margin-top: 10px;
     color: black;
-    background-color: #C3E2DD;
+    background-color: var(--main-button);
     border-radius: 3px 3px 3px 3px;
     border-width: 1px;
     border-style: none;

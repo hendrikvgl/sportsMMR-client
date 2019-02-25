@@ -7,8 +7,10 @@ and open the template in the editor.
     Created on : 30 Jan 2019, 15:18:53
     Author     : hevo
 */
+@import "ColorBranding.css";
+
 .standard-font {
-    color: #e1eff6;
+    color: var(--main-font);
 }
 
 .font-session-date {
@@ -39,9 +41,9 @@ and open the template in the editor.
     width: 100%;
     height: 50px;
     padding: 5px;
-    border-color: #2C4251;
+    border-color: var(--main-border-item);
     border-style: solid;
-    background-color: #25626B;
+    background-color: var(--main-bg-item);
     margin-left: 0;
     margin-right: 0;
     cursor: pointer;
@@ -56,7 +58,7 @@ and open the template in the editor.
 }
 
 .item-history-match {
-    border-color: #2C4251;
+    border-color: var(--main-border-item);
     border-style: solid; 
     padding: 4px;
     background-color: #B7C0C9;

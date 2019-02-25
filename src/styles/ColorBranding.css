@@ -8,10 +8,26 @@ and open the template in the editor.
     Author     : hevo
 */
 
+
+/*THEME DARK OCEAN*/
+:root {
+  --main-bg: #2c4251;
+  --main-font: #E1EFF6;
+  --main-bg-container: #468189;
+  --main-bg-item: #25626B;
+  --main-border-item: #EDEFE6;
+  --main-button: #C3E2DD;
+  --main-button-second: #84CCC6;
+}
+
+
 /*:root {
-  --primaryBackground: #2c4251;
-  --primaryFont: #e1eff6;
-  --primaryDetailBlue: #7fbeeb;
-  --primaryDetailGreen: #9ad5ca;
-  --primaryAttention: #e54b4b;
+  --main-bg: #EFEFED;
+  --main-font: #252323;
+  --main-bg-container: #BEC7DB;
+  --main-bg-item: #B3BEBF;
+  --main-border-item: #929A9B;
+  --main-button: #547D96;
+  --main-button-second: #7BA0B7;
+      
 }*/

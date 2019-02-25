@@ -11,13 +11,27 @@ import Col from 'react-bootstrap/lib/Col';
 import matchService from '../../DatabaseServices/MatchDbService';
 import playerService from '../../DatabaseServices/PlayerDbService';
 import { SessionMatchList } from './SessionMatchList';
-import Carousel from 'react-bootstrap/lib/Carousel'
+import Carousel from 'react-bootstrap/lib/Carousel';
+import { MatchPlayerSelect } from './MatchPlayerSelect';
 
 export class MatchManager extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {activeMatch: false, activeMatchId: null, teamOne: [], teamTwo: [], resultsOne: null, resultsTwo: null, matchListToggle: false, teamOneMMR: null, teamTwoMMR: null};
+        this.state = {
+            activeMatch: false,
+            activeMatchId: null,
+            teamOne: [],
+            teamTwo: [],
+            resultsOne: null,
+            resultsTwo: null,
+            matchListToggle: false,
+            teamOneMMR: null,
+            teamTwoMMR: null,
+            showModal: false,
+            customPlayers: [],
+            customTeamIndex: 1
+        };
         this.getMatchesSuccessCallback = this.getMatchesSuccessCallback.bind(this);
         this.onMatchShuffle = this.onMatchShuffle.bind(this);
         this.matchCreationSuccCallback = this.matchCreationSuccCallback.bind(this);
@@ -86,8 +100,42 @@ export class MatchManager extends React.Component {
         matchService.getMostRecentSessionMatch(this.props.sessionId, this.onMostRecentSuccess, this.onMostRecentError);
     }
 
+    onMatchCustom = () => {
+        let players = [];
+        this.props.players.map(x => players.push(x));
+        console.log("MM: " + JSON.stringify(players));
+        this.setState({showModal: true, customPlayers: players, customTeamIndex: 1});
+    }
+
+    onCustomTeam1 = (players) => {
+
+        let playersleft = this.state.customPlayers;
+
+        for (var i = 0; i < players.length; i++) {
+            const index = playersleft.findIndex(x => x.id === players[i].id);
+            playersleft.splice(index, 1);
+        }
+
+        this.setState({teamOne: players, showModal: false, customPlayers: playersleft}, () => this.setState({customTeamIndex: 2, showModal: true}));
+    }
+
+    onCustomTeam2 = (players) => {
+        if (this.state.teamOne.length === 0 || players.length === 0) {
+            alert("Each team must consist of atleast one player.");
+            this.setState({showModal: false});
+        } else {
+            this.setState({teamTwo: players, showModal: false},
+                    () => matchService.postMatch(this.props.sessionId, this.state.teamOne, this.state.teamTwo, this.matchCreationSuccCallback, this.matchCreationErrorCallback)
+            );
+        }
+    }
+    
+    onSelectionCancel = () => {
+        this.setState({showModal: false});
+    }
+
     onMostRecentSuccess(response) {
- 
+
         let teamOne = null;
         let teamTwo = null;
 
@@ -192,6 +240,7 @@ export class MatchManager extends React.Component {
 
         if ((resultOne !== null && resultOne !== "") && (resultTwo !== null && resultTwo !== "")) {
             matchService.endMatch(this.state.activeMatchId, [resultOne, resultTwo], winners, this.onMatchEndSuccessCallback, this.onMatchEndErrorCallback);
+            this.setState({resultsOne: null, resultsTwo: null});
         }
 
     }
@@ -255,6 +304,17 @@ export class MatchManager extends React.Component {
                         <Carousel.Item>
                             <div className="carousel-item-content">
                                 <div className="modes-title">
+                                    Custom Teams mode
+                                </div>
+                                <div className="modes-descr" >
+                                    Play a match with your custom lineup.
+                                </div>
+                                <button onClick={this.onMatchCustom} className="match-button-new">Enter the Court</button>
+                            </div>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <div className="carousel-item-content">
+                                <div className="modes-title">
                                     Rematch mode
                                 </div>
                                 <div className="modes-descr" >
@@ -294,7 +354,7 @@ export class MatchManager extends React.Component {
             width: teamTwoPerc + '%'
         };
         return(<Container>
-        
+            <MatchPlayerSelect team={this.state.customTeamIndex} onSubmit1={this.onCustomTeam1} onSubmit2={this.onCustomTeam2} onCancel={this.onSelectionCancel} show={this.state.showModal} players={this.state.customPlayers} />
             { !activeMatch ? (
                             <div>
                                 <Row>
@@ -318,7 +378,7 @@ export class MatchManager extends React.Component {
                                 <Row flex={true} className="row-active-match" noGutters={true}>
                                     <Col className="team-players" xs={4}> 
                                     <textarea disabled className="team-players-area">
-                                                                                                                                                                                                                                                                                                                {teamOnePlayers}
+                                                                                                                                                                                                                                                                                                                                                                                        {teamOnePlayers}
                                     </textarea>
                                     </Col>
                         
@@ -336,7 +396,7 @@ export class MatchManager extends React.Component {
                         
                                     <Col className="team-players" xs={4}> 
                                     <textarea disabled className="team-players-area team-players-area-right">
-                                                                                                                                                                                                                                                                                                                {teamTwoPlayers}
+                                                                                                                                                                                                                                                                                                                                                                                        {teamTwoPlayers}
                                     </textarea>
                                     </Col>
                         
