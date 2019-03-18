@@ -24,16 +24,21 @@ export class PlayerListContainer extends React.Component {
     }
 
     render() {
+        let {players} = this.props;
 
+        players.sort(function (a, b) {
+            return JSON.parse(b).mmr - JSON.parse(a).mmr;
+        });
+        
         return (
                 (
-                <Container className="container-player-list" >
-                            {this.props.players.map(player => (
+                        <Container className="container-player-list" >
+                            {players.map(player => (
                                                                 <PlayerListItem admin={this.props.admin} onDelete={this.onDelete} json={JSON.parse(player)} />
                                                     ))}
                         </Container>
-                                )
-        );
+                        )
+                );
     }
 
 }
