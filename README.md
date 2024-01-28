@@ -1,4 +1,7 @@
-﻿React Frontend for sportsMMR web application. Backend repo here: https://github.com/hendrikvgl/sportsMMR-server
+Matchmaking and rating tool for volleyball and spikeball.
+I've taught myself React with this project. 
+ 
+React Frontend for sportsMMR web application. Backend repo here: https://github.com/hendrikvgl/sportsMMR-server
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
